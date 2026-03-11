@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIMASTROE — Premium Store by Dimas Erlangga</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:#faf8f5;color:#1a1208;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+:root{--cream:#faf8f5;--cream2:#f2ede6;--warm:#e8ddd0;--orange:#e8600a;--orange2:#ff7c2a;--green:#2d6a4f;--green2:#40916c;--gold:#c9a84c;--text:#1a1208;--muted:#7a6a57;--border:#e0d5c8;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--cream2);}::-webkit-scrollbar-thumb{background:var(--orange);border-radius:5px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 56px;height:70px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,245,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:box-shadow 0.3s;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;letter-spacing:2px;}
+.nav-logo span{color:var(--orange);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);transition:color 0.2s;letter-spacing:0.3px;}
+.nav-links a:hover{color:var(--orange);}
+.nav-right{display:flex;align-items:center;gap:14px;}
+.nav-cta{background:var(--orange);color:white;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:600;transition:all 0.3s;display:flex;align-items:center;gap:7px;}
+.nav-cta:hover{background:var(--orange2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,96,10,0.3);}
+
+/* HAMBURGER */
+.nav-ham{display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:8px;z-index:1001;border:none;background:none;}
+.nav-ham span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.35s cubic-bezier(.23,1,.32,1);display:block;}
+.nav-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* MOBILE MENU */
+.mobile-menu{position:fixed;top:70px;left:0;right:0;bottom:0;background:rgba(250,248,245,0.98);backdrop-filter:blur(24px);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transform:translateY(-110%);transition:transform 0.45s cubic-bezier(.23,1,.32,1);pointer-events:none;}
+.mobile-menu.open{transform:translateY(0);pointer-events:all;}
+.mobile-menu a{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--text);transition:color 0.2s;}
+.mobile-menu a:hover{color:var(--orange);}
+.mobile-menu .m-cta{background:var(--orange);color:white;padding:14px 36px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;margin-top:8px;}
+
+/* HERO */
+.hero{min-height:100vh;padding:120px 56px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1280px;margin:0 auto;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(232,96,10,0.08);border:1px solid rgba(232,96,10,0.2);color:var(--orange);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:100px;margin-bottom:24px;animation:fadeUp 0.6s 0.1s ease both;}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.8);}}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,5.5vw,5rem);font-weight:900;line-height:1.05;letter-spacing:-1px;margin-bottom:20px;animation:fadeUp 0.6s 0.2s ease both;}
+.hero-title em{font-style:italic;color:var(--orange);}
+.hero-title .line2{display:block;color:var(--green);}
+.hero-desc{font-size:16px;font-weight:300;color:var(--muted);line-height:1.8;max-width:460px;margin-bottom:36px;animation:fadeUp 0.6s 0.3s ease both;}
+.hero-desc strong{color:var(--text);font-weight:600;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp 0.6s 0.4s ease both;}
+.btn-primary{background:var(--orange);color:white;padding:14px 30px;border-radius:100px;font-size:14px;font-weight:600;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary:hover{background:var(--orange2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(232,96,10,0.3);}
+.btn-secondary{background:transparent;color:var(--text);border:1.5px solid var(--border);padding:14px 30px;border-radius:100px;font-size:14px;font-weight:500;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;cursor:pointer;}
+.btn-secondary:hover{border-color:var(--orange);color:var(--orange);}
+
+/* HERO BADGES — CLICKABLE */
+.hero-badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;animation:fadeUp 0.6s 0.5s ease both;}
+.hb{background:var(--cream2);border:1.5px solid var(--border);border-radius:100px;padding:8px 16px;font-size:12px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px;cursor:pointer;transition:all 0.25s;user-select:none;}
+.hb:hover,.hb.active{background:var(--orange);color:white;border-color:var(--orange);transform:translateY(-2px);box-shadow:0 6px 18px rgba(232,96,10,0.25);}
+
+/* HERO RIGHT */
+.hero-right{position:relative;animation:slideIn 0.8s 0.3s cubic-bezier(.23,1,.32,1) both;}
+.hero-img-main{width:100%;height:480px;border-radius:24px;overflow:hidden;background:var(--cream2);position:relative;}
+.hero-img-main img{width:100%;height:100%;object-fit:cover;}
+.hero-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(26,18,8,0.45));}
+.hero-img-label{position:absolute;bottom:20px;left:20px;right:20px;background:rgba(250,248,245,0.95);backdrop-filter:blur(10px);border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
+.hil-text{font-size:13px;font-weight:600;color:var(--text);}
+.hil-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.hil-price{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--orange);}
+.float-card{position:absolute;background:white;border-radius:14px;padding:12px 16px;box-shadow:0 8px 32px rgba(0,0,0,0.1);animation:float 4s ease-in-out infinite;}
+.float-card-1{top:-20px;right:-20px;animation-delay:0s;}
+.float-card-2{bottom:100px;left:-24px;animation-delay:1.5s;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.fc-label{font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;}
+.fc-val{font-size:18px;font-weight:700;color:var(--green);}
+.fc-sub{font-size:10px;color:var(--muted);}
+
+/* MARQUEE */
+.marquee-wrap{background:var(--orange);padding:14px 0;overflow:hidden;}
+.marquee-track{display:flex;width:max-content;animation:marquee 25s linear infinite;}
+.marquee-item{display:flex;align-items:center;gap:12px;padding:0 32px;white-space:nowrap;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.85);}
+.marquee-item span{color:rgba(255,255,255,0.4);font-size:16px;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* CATEGORIES */
+.categories{max-width:1280px;margin:0 auto;padding:100px 56px;}
+.sec-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.sec-label::before{content:'';width:24px;height:1.5px;background:var(--orange);}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:48px;}
+.sec-title em{font-style:italic;color:var(--orange);}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.cat-card{border-radius:18px;overflow:hidden;cursor:pointer;transition:all 0.35s cubic-bezier(.23,1,.32,1);position:relative;aspect-ratio:3/4;}
+.cat-card:hover{transform:translateY(-8px);box-shadow:0 20px 48px rgba(0,0,0,0.12);}
+.cat-img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
+.cat-card:hover .cat-img{transform:scale(1.06);}
+.cat-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(26,18,8,0.75));}
+.cat-info{position:absolute;bottom:0;left:0;right:0;padding:18px 16px;}
+.cat-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:white;margin-bottom:3px;}
+.cat-count{font-size:11px;color:rgba(255,255,255,0.65);font-weight:500;}
+.cat-badge{position:absolute;top:12px;left:12px;background:white;color:var(--orange);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:100px;}
+
+/* PRODUCTS */
+.products{background:var(--cream2);padding:100px 56px;}
+.products-inner{max-width:1280px;margin:0 auto;}
+.products-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px;}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;}
+.ftab{padding:8px 18px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;border:1.5px solid var(--border);color:var(--muted);background:white;}
+.ftab.active,.ftab:hover{background:var(--orange);color:white;border-color:var(--orange);}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.prod-card{background:white;border-radius:18px;overflow:hidden;border:1px solid var(--border);transition:all 0.35s cubic-bezier(.23,1,.32,1);cursor:pointer;}
+.prod-card.hidden{display:none;}
+.prod-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.1);border-color:transparent;}
+.prod-img{aspect-ratio:1;overflow:hidden;position:relative;background:var(--cream2);}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
+.prod-card:hover .prod-img img{transform:scale(1.07);}
+.prod-tag{position:absolute;top:10px;left:10px;padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:0.5px;}
+.tag-new{background:#dcfce7;color:var(--green);}
+.tag-hot{background:#fef3c7;color:#92400e;}
+.prod-info{padding:16px;}
+.prod-cat{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
+.prod-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.4;}
+.prod-bottom{display:flex;justify-content:space-between;align-items:center;}
+.prod-price{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--orange);}
+.prod-old{font-size:11px;color:var(--muted);text-decoration:line-through;margin-left:5px;}
+.prod-btn{width:34px;height:34px;border-radius:50%;background:var(--orange);color:white;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.prod-btn:hover{background:var(--orange2);transform:scale(1.12);}
+.no-result{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);font-size:15px;display:none;}
+.no-result.show{display:block;}
+
+/* TESTIMONIALS */
+.testimonials{background:var(--cream2);padding:100px 56px;}
+.testi-inner{max-width:1280px;margin:0 auto;}
+.testi-header{text-align:center;margin-bottom:56px;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.testi-card{background:white;border-radius:18px;padding:28px;border:1px solid var(--border);transition:all 0.3s;}
+.testi-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.08);}
+.testi-stars{color:#f59e0b;font-size:14px;letter-spacing:2px;margin-bottom:14px;}
+.testi-text{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:12px;}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--gold));display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:white;flex-shrink:0;}
+.testi-name{font-size:14px;font-weight:600;color:var(--text);}
+.testi-loc{font-size:11px;color:var(--muted);}
+
+/* CONTACT */
+.contact{max-width:1280px;margin:0 auto;padding:100px 56px;}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.contact-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:16px;}
+.contact-title em{font-style:italic;color:var(--orange);}
+.contact-desc{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:36px;font-weight:300;}
+.sosmed-grid{display:flex;flex-direction:column;gap:12px;}
+.sosmed-card{display:flex;align-items:center;gap:16px;background:var(--cream2);border:1.5px solid var(--border);border-radius:14px;padding:16px 20px;transition:all 0.3s;cursor:pointer;}
+.sosmed-card:hover{border-color:var(--orange);background:rgba(232,96,10,0.04);transform:translateX(6px);}
+.sosmed-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.sosmed-ico.wa{background:#dcfce7;}.sosmed-ico.tg{background:#e0f2fe;}.sosmed-ico.tt{background:#fce7f3;}.sosmed-ico.fb{background:#eff6ff;}.sosmed-ico.ig{background:#fef3c7;}
+.sosmed-label{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.sosmed-val{font-size:14px;font-weight:600;color:var(--text);}
+.sosmed-arr{margin-left:auto;color:var(--muted);font-size:18px;}
+.contact-form{display:flex;flex-direction:column;gap:14px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-label{font-size:12px;font-weight:600;color:var(--text);letter-spacing:0.3px;}
+.form-input{background:var(--cream2);border:1.5px solid var(--border);border-radius:12px;padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color 0.2s;width:100%;}
+.form-input:focus{border-color:var(--orange);}
+.form-input::placeholder{color:var(--muted);}
+textarea.form-input{resize:none;height:110px;}
+.btn-send{background:var(--orange);color:white;border:none;padding:14px 28px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;gap:8px;width:fit-content;}
+.btn-send:hover{background:var(--orange2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,96,10,0.3);}
+
+/* FOOTER */
+footer{background:var(--text);padding:56px;}
+.footer-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.footer-brand-logo{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;letter-spacing:2px;color:white;margin-bottom:14px;}
+.footer-brand-logo span{color:var(--orange);}
+.footer-brand-desc{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.8;font-weight:300;max-width:260px;}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:18px;}
+.footer-links{display:flex;flex-direction:column;gap:10px;}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.55);transition:color 0.2s;cursor:pointer;}
+.footer-links a:hover{color:var(--orange);}
+.footer-bottom{max-width:1280px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.08);padding-top:28px;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.25);}
+.footer-owner{font-size:12px;color:rgba(255,255,255,0.4);}
+.footer-owner span{color:var(--orange);}
+
+/* TOAST */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text);color:white;padding:14px 24px;border-radius:100px;font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:all 0.4s cubic-bezier(.23,1,.32,1);white-space:nowrap;pointer-events:none;display:flex;align-items:center;gap:8px;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideIn{from{opacity:0;transform:translateX(40px);}to{opacity:1;transform:translateX(0);}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.1s;}.reveal-delay-2{transition-delay:0.2s;}.reveal-delay-3{transition-delay:0.3s;}.reveal-delay-4{transition-delay:0.4s;}
+
+/* MOBILE */
+@media(max-width:1024px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:100px 24px 60px;min-height:auto;}
+  .hero-right{display:none;}
+  .categories,.products,.ai-section,.testimonials,.contact{padding:60px 24px;}
+  .cat-grid{grid-template-columns:repeat(2,1fr);}
+  .product-grid{grid-template-columns:repeat(2,1fr);}
+  .testi-grid{grid-template-columns:1fr;}
+  .contact-inner{grid-template-columns:1fr;gap:48px;}
+  footer{padding:40px 24px;}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:32px;}
+  .footer-bottom{flex-direction:column;gap:10px;text-align:center;}
+}
+@media(max-width:600px){
+  .product-grid{grid-template-columns:1fr 1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .footer-inner{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#products" onclick="closeMenu()">🛍️ Produk</a>
+  <a href="#" onclick="filterCategory('fashion');closeMenu()">👕 Fashion</a>
+  <a href="#" onclick="filterCategory('aksesoris');closeMenu()">💎 Aksesoris</a>
+  <a href="#" onclick="filterCategory('elektronik');closeMenu()">📱 Elektronik</a>
+  <a href="#" onclick="filterCategory('kuliner');closeMenu()">🍜 Kuliner</a>
+  <a href="#contact" onclick="closeMenu()">📞 Kontak</a>
+  <a href="https://wa.me/6281334331776" class="m-cta" target="_blank">💬 WhatsApp Kami</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <svg width="140" height="36" viewBox="0 0 140 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Monogram icon -->
+      <g transform="translate(0,2)">
+        <!-- I bar left -->
+        <rect x="0" y="0" width="3" height="30" fill="#7a5c3a"/>
+        <!-- S curve shape -->
+        <path d="M5,0 Q16,0 16,8 Q16,15 8,15 Q0,15 0,23 Q0,30 12,30" stroke="#c9813a" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <!-- D shape -->
+        <path d="M14,0 L14,30 Q28,30 28,15 Q28,0 14,0 Z" fill="none" stroke="#7a5c3a" stroke-width="2.5"/>
+      </g>
+      <!-- DIMAS text -->
+      <text x="36" y="24" font-family="'Playfair Display',Georgia,serif" font-weight="900" font-size="18" letter-spacing="1" fill="#4a3520">DIMAS</text>
+      <!-- TROE text in orange -->
+      <text x="95" y="24" font-family="'Playfair Display',Georgia,serif" font-weight="900" font-size="18" letter-spacing="1" fill="#c9813a">TROE</text>
+    </svg>
+  </div>
+  <div class="nav-links">
+    <a href="#products">Produk</a>
+    <a href="#contact">Kontak</a>
+  </div>
+  <div class="nav-right">
+    <a href="https://wa.me/6281334331776" class="nav-cta" target="_blank">💬 WhatsApp</a>
+    <button class="nav-ham" id="hamBtn" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:var(--cream);">
+  <!-- Logo Brand -->
+  <div style="display:flex;justify-content:center;padding:90px 0 0;background:var(--cream);">
+    <div style="text-align:center;">
+      <svg width="240" height="185" viewBox="0 0 240 185" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(80,5)">
+          <rect x="0" y="0" width="7" height="82" rx="2" fill="#7a5c3a"/>
+          <path d="M12,2 Q42,2 42,22 Q42,42 16,42 Q-4,42 -4,62 Q-4,82 32,82" stroke="#c9813a" stroke-width="7.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M36,2 L36,82 Q82,80 82,42 Q82,2 36,2 Z" fill="none" stroke="#7a5c3a" stroke-width="6.5" stroke-linejoin="round"/>
+        </g>
+        <text x="120" y="130" font-family="'Playfair Display',Georgia,serif" font-weight="900" font-size="33" letter-spacing="3.5" fill="#4a3520" text-anchor="middle">DIMAS<tspan fill="#c9813a">TROE</tspan></text>
+        <line x1="38" y1="141" x2="202" y2="141" stroke="#b09070" stroke-width="0.8"/>
+        <text x="120" y="158" font-family="'DM Sans',sans-serif" font-weight="500" font-size="9" letter-spacing="3.5" fill="#9a7a5a" text-anchor="middle">GLOBAL PREMIUM STORE • EST. 2024</text>
+      </svg>
+    </div>
+  </div>
+  <div class="hero">
+    <div>
+      <div class="hero-tag"><div class="hero-tag-dot"></div>Premium Store · Est. 2024</div>
+      <h1 class="hero-title">Belanja <em>Produk</em><span class="line2">Terbaik</span> untuk Kamu.</h1>
+      <p class="hero-desc">Dari fashion terkini hingga gadget canggih — <strong>DIMASTROE</strong> hadir dengan produk berkualitas internasional. Dikirim ke seluruh Indonesia. 🇮🇩</p>
+      <div class="hero-actions">
+        <a href="#products" class="btn-primary">🛍️ Belanja Sekarang</a>
+        <a href="#contact" class="btn-secondary">📞 Hubungi Kami</a>
+      </div>
+      <div class="hero-badges">
+        <div class="hb" onclick="filterCategory('fashion')">👕 Fashion</div>
+        <div class="hb" onclick="filterCategory('aksesoris')">💎 Aksesoris</div>
+        <div class="hb" onclick="filterCategory('elektronik')">📱 Elektronik</div>
+        <div class="hb" onclick="filterCategory('kuliner')">🍜 Kuliner</div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="float-card float-card-1"><div class="fc-label">Total Pelanggan</div><div class="fc-val">2.4K+</div><div class="fc-sub">Puas berbelanja</div></div>
+      <div class="hero-img-main">
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80" alt="DIMASTROE Store">
+        <div class="hero-img-overlay"></div>
+        <div class="hero-img-label">
+          <div><div class="hil-text">Koleksi Terbaru</div><div class="hil-sub">Premium Quality</div></div>
+          <div class="hil-price">Mulai 45K</div>
+        </div>
+      </div>
+      <div class="float-card float-card-2"><div class="fc-label">Rating Toko</div><div class="fc-val">⭐ 4.9</div><div class="fc-sub">500+ ulasan</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span>✦</span>Fashion Premium</div><div class="marquee-item"><span>✦</span>Aksesoris Pilihan</div><div class="marquee-item"><span>✦</span>Elektronik Terkini</div><div class="marquee-item"><span>✦</span>Kuliner Nusantara</div><div class="marquee-item"><span>✦</span>Pengiriman Seluruh Indonesia</div><div class="marquee-item"><span>✦</span>Garansi Kepuasan</div><div class="marquee-item"><span>✦</span>Produk Premium</div>
+    <div class="marquee-item"><span>✦</span>Fashion Premium</div><div class="marquee-item"><span>✦</span>Aksesoris Pilihan</div><div class="marquee-item"><span>✦</span>Elektronik Terkini</div><div class="marquee-item"><span>✦</span>Kuliner Nusantara</div><div class="marquee-item"><span>✦</span>Pengiriman Seluruh Indonesia</div><div class="marquee-item"><span>✦</span>Garansi Kepuasan</div><div class="marquee-item"><span>✦</span>Produk Premium</div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="sec-label">Jelajahi</div>
+  <h2 class="sec-title">Kategori <em>Pilihan</em></h2>
+  <div class="cat-grid reveal">
+    <div class="cat-card" onclick="filterCategory('fashion')">
+      <img class="cat-img" src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80" alt="Fashion">
+      <div class="cat-overlay"></div><div class="cat-badge">Terlaris</div>
+      <div class="cat-info"><div class="cat-name">👕 Fashion</div><div class="cat-count">Klik untuk lihat produk</div></div>
+    </div>
+    <div class="cat-card" onclick="filterCategory('aksesoris')">
+      <img class="cat-img" src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=400&q=80" alt="Aksesoris">
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><div class="cat-name">💎 Aksesoris</div><div class="cat-count">Klik untuk lihat produk</div></div>
+    </div>
+    <div class="cat-card" onclick="filterCategory('elektronik')">
+      <img class="cat-img" src="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=400&q=80" alt="Elektronik">
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><div class="cat-name">📱 Elektronik</div><div class="cat-count">Klik untuk lihat produk</div></div>
+    </div>
+    <div class="cat-card" onclick="filterCategory('kuliner')">
+      <img class="cat-img" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt="Kuliner">
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><div class="cat-name">🍜 Kuliner</div><div class="cat-count">Klik untuk lihat produk</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-inner">
+    <div class="products-header reveal">
+      <div>
+        <div class="sec-label">Koleksi</div>
+        <h2 class="sec-title" id="produk-judul">Semua <em>Produk</em></h2>
+      </div>
+      <div class="filter-tabs">
+        <div class="ftab active" onclick="filterTab(this,'all')">Semua</div>
+        <div class="ftab" onclick="filterTab(this,'fashion')">👕 Fashion</div>
+        <div class="ftab" onclick="filterTab(this,'aksesoris')">💎 Aksesoris</div>
+        <div class="ftab" onclick="filterTab(this,'elektronik')">📱 Elektronik</div>
+        <div class="ftab" onclick="filterTab(this,'kuliner')">🍜 Kuliner</div>
+      </div>
+    </div>
+    <div class="product-grid" id="productGrid">
+      <!-- FASHION -->
+      <div class="prod-card" data-cat="fashion">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80" alt="Sneaker"><span class="prod-tag tag-hot">🔥 Hot</span></div>
+        <div class="prod-info"><div class="prod-cat">Fashion</div><div class="prod-name">Sneaker Premium Limited Edition</div><div class="prod-bottom"><div><span class="prod-price">Rp 450K</span><span class="prod-old">Rp 650K</span></div><button class="prod-btn" onclick="order('Sneaker Premium Limited Edition')">+</button></div></div>
+      </div>
+      <div class="prod-card" data-cat="fashion">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Jaket"><span class="prod-tag tag-hot">🔥 Hot</span></div>
+        <div class="prod-info"><div class="prod-cat">Fashion</div><div class="prod-name">Jaket Bomber Oversize Premium</div><div class="prod-bottom"><div><span class="prod-price">Rp 395K</span><span class="prod-old">Rp 550K</span></div><button class="prod-btn" onclick="order('Jaket Bomber Oversize Premium')">+</button></div></div>
+      </div>
+      <div class="prod-card" data-cat="fashion">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&q=80" alt="Kaos"><span class="prod-tag tag-new">✨ Baru</span></div>
+        <div class="prod-info"><div class="prod-cat">Fashion</div><div class="prod-name">Kaos Oversized Polos Premium</div><div class="prod-bottom"><div><span class="prod-price">Rp 120K</span></div><button class="prod-btn" onclick="order('Kaos Oversized Polos Premium')">+</button></div></div>
+      </div>
+      <!-- AKSESORIS -->
+      <div class="prod-card" data-cat="aksesoris">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80" alt="Jam"><span class="prod-tag tag-new">✨ Baru</span></div>
+        <div class="prod-info"><div class="prod-cat">Aksesoris</div><div class="prod-name">Jam Tangan Analog Klasik</div><div class="prod-bottom"><div><span class="prod-price">Rp 320K</span></div><button class="prod-btn" onclick="order('Jam Tangan Analog Klasik')">+</button></div></div>
+      </div>
+      <div class="prod-card" data-cat="aksesoris">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&q=80" alt="Tas"><span class="prod-tag tag-new">✨ Baru</span></div>
+        <div class="prod-info"><div class="prod-cat">Aksesoris</div><div class="prod-name">Tas Ransel Anti Air Multifungsi</div><div class="prod-bottom"><div><span class="prod-price">Rp 220K</span></div><button class="prod-btn" onclick="order('Tas Ransel Anti Air Multifungsi')">+</button></div></div>
+      </div>
+      <div class="prod-card" data-cat="aksesoris">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=400&q=80" alt="Kacamata"><span class="prod-tag tag-hot">🔥 Hot</span></div>
+        <div class="prod-info"><div class="prod-cat">Aksesoris</div><div class="prod-name">Kacamata Retro Anti UV</div><div class="prod-bottom"><div><span class="prod-price">Rp 95K</span><span class="prod-old">Rp 150K</span></div><button class="prod-btn" onclick="order('Kacamata Retro Anti UV')">+</button></div></div>
+      </div>
+      <!-- ELEKTRONIK -->
+      <div class="prod-card" data-cat="elektronik">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&q=80" alt="Earphone"><span class="prod-tag tag-hot">🔥 Hot</span></div>
+        <div class="prod-info"><div class="prod-cat">Elektronik</div><div class="prod-name">Wireless Earphone Pro Max</div><div class="prod-bottom"><div><span class="prod-price">Rp 280K</span><span class="prod-old">Rp 400K</span></div><button class="prod-btn" onclick="order('Wireless Earphone Pro Max')">+</button></div></div>
+      </div>
+      <div class="prod-card" data-cat="elektronik">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?w=400&q=80" alt="Powerbank"></div>
+        <div class="prod-info"><div class="prod-cat">Elektronik</div><div class="prod-name">Powerbank 20.000mAh Fast Charging</div><div class="prod-bottom"><div><span class="prod-price">Rp 185K</span><span class="prod-old">Rp 250K</span></div><button class="prod-btn" onclick="order('Powerbank 20.000mAh Fast Charging')">+</button></div></div>
+      </div>
+      <div class="prod-card" data-cat="elektronik">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&q=80" alt="Smartwatch"><span class="prod-tag tag-new">✨ Baru</span></div>
+        <div class="prod-info"><div class="prod-cat">Elektronik</div><div class="prod-name">Smartwatch Sport Series 5</div><div class="prod-bottom"><div><span class="prod-price">Rp 350K</span></div><button class="prod-btn" onclick="order('Smartwatch Sport Series 5')">+</button></div></div>
+      </div>
+      <!-- KULINER -->
+      <div class="prod-card" data-cat="kuliner">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80" alt="Kuliner"><span class="prod-tag tag-new">✨ Baru</span></div>
+        <div class="prod-info"><div class="prod-cat">Kuliner</div><div class="prod-name">Sambal Medan Spesial Homemade</div><div class="prod-bottom"><div><span class="prod-price">Rp 75K</span></div><button class="prod-btn" onclick="order('Sambal Medan Spesial Homemade')">+</button></div></div>
+      </div>
+      <div class="prod-card" data-cat="kuliner">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80" alt="Kue"><span class="prod-tag tag-hot">🔥 Hot</span></div>
+        <div class="prod-info"><div class="prod-cat">Kuliner</div><div class="prod-name">Kue Bolu Medan Tradisional</div><div class="prod-bottom"><div><span class="prod-price">Rp 65K</span></div><button class="prod-btn" onclick="order('Kue Bolu Medan Tradisional')">+</button></div></div>
+      </div>
+      <div class="prod-card" data-cat="kuliner">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&q=80" alt="Minuman"><span class="prod-tag tag-new">✨ Baru</span></div>
+        <div class="prod-info"><div class="prod-cat">Kuliner</div><div class="prod-name">Minuman Herbal Segar Nusantara</div><div class="prod-bottom"><div><span class="prod-price">Rp 45K</span></div><button class="prod-btn" onclick="order('Minuman Herbal Segar Nusantara')">+</button></div></div>
+      </div>
+      <div class="no-result" id="noResult">Tidak ada produk di kategori ini 😔</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testi-inner">
+    <div class="testi-header reveal">
+      <div class="sec-label" style="justify-content:center;">Ulasan</div>
+      <h2 class="sec-title">Apa Kata <em>Pelanggan?</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal reveal-delay-1"><div class="testi-stars">★★★★★</div><div class="testi-text">"Kualitas produknya luar biasa! Jaket yang saya beli sesuai foto, jahitan rapi, bahan tebal. Puas banget dan pasti balik lagi!"</div><div class="testi-author"><div class="testi-avatar">R</div><div><div class="testi-name">Rizky Pratama</div><div class="testi-loc">📍 Medan, Indonesia</div></div></div></div>
+      <div class="testi-card reveal reveal-delay-2"><div class="testi-stars">★★★★★</div><div class="testi-text">"Earphone-nya suaranya jernih, bass-nya nendang! Harga murah tapi kualitas premium. Recommended banget beli di DIMASTROE!"</div><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,var(--green),#0891b2);">S</div><div><div class="testi-name">Sari Dewi</div><div class="testi-loc">📍 Jakarta, Indonesia</div></div></div></div>
+      <div class="testi-card reveal reveal-delay-3"><div class="testi-stars">★★★★★</div><div class="testi-text">"Sambal Medan-nya nagih banget! Pedes yang pas, aroma yang khas. Udah order 5 kali dan keluarga saya semua suka!"</div><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">A</div><div><div class="testi-name">Ahmad Fauzi</div><div class="testi-loc">📍 Surabaya, Indonesia</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <div class="sec-label">Hubungi Kami</div>
+      <h2 class="contact-title">Siap <em>Membantu</em> Kamu!</h2>
+      <p class="contact-desc">Punya pertanyaan tentang produk? Hubungi kami langsung — kami siap membalas segera!</p>
+      <div class="sosmed-grid">
+        <a href="https://wa.me/6281334331776" target="_blank" class="sosmed-card"><div class="sosmed-ico wa">💬</div><div><div class="sosmed-label">WhatsApp</div><div class="sosmed-val">081334331776</div></div><div class="sosmed-arr">→</div></a>
+        <a href="https://t.me/erlanggakuat" target="_blank" class="sosmed-card"><div class="sosmed-ico tg">✈️</div><div><div class="sosmed-label">Telegram</div><div class="sosmed-val">@erlanggakuat</div></div><div class="sosmed-arr">→</div></a>
+        <a href="https://www.tiktok.com/@dimas0001" target="_blank" class="sosmed-card"><div class="sosmed-ico tt">🎵</div><div><div class="sosmed-label">TikTok</div><div class="sosmed-val">@dimas0001</div></div><div class="sosmed-arr">→</div></a>
+        <a href="https://www.facebook.com/dimas.enel" target="_blank" class="sosmed-card"><div class="sosmed-ico fb">👤</div><div><div class="sosmed-label">Facebook</div><div class="sosmed-val">dimas.enel</div></div><div class="sosmed-arr">→</div></a>
+        <a href="https://www.instagram.com/dimasenerlangga/" target="_blank" class="sosmed-card"><div class="sosmed-ico ig">📸</div><div><div class="sosmed-label">Instagram</div><div class="sosmed-val">@dimasenerlangga</div></div><div class="sosmed-arr">→</div></a>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="sec-label">Pesan Langsung</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:24px;">Kirim <em style="color:var(--orange);">Pesan</em></h3>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Nama</label><input type="text" class="form-input" id="f-nama" placeholder="Nama kamu"></div>
+          <div class="form-group"><label class="form-label">No. WhatsApp</label><input type="text" class="form-input" id="f-wa" placeholder="08xx"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Produk yang Diminati</label><input type="text" class="form-input" id="f-produk" placeholder="Contoh: Jaket Bomber, Earphone..."></div>
+        <div class="form-group"><label class="form-label">Pesan</label><textarea class="form-input" id="f-pesan" placeholder="Tuliskan pertanyaan atau pesananmu..."></textarea></div>
+        <button class="btn-send" onclick="kirimPesan()">💬 Kirim via WhatsApp →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-logo">DIMAS<span>TROE</span></div>
+      <p class="footer-brand-desc">Toko premium milik Dimas Erlangga — menghadirkan produk berkualitas tinggi untuk kehidupan yang lebih baik.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Produk</div>
+      <div class="footer-links">
+        <a onclick="filterCategory('fashion')">👕 Fashion</a>
+        <a onclick="filterCategory('aksesoris')">💎 Aksesoris</a>
+        <a onclick="filterCategory('elektronik')">📱 Elektronik</a>
+        <a onclick="filterCategory('kuliner')">🍜 Kuliner</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Informasi</div>
+      <div class="footer-links">
+        <a href="#categories">Kategori</a>
+        <a href="#products">Semua Produk</a>
+        <a href="#contact">Kontak</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Sosial Media</div>
+      <div class="footer-links">
+        <a href="https://wa.me/6281334331776" target="_blank">💬 WhatsApp</a>
+        <a href="https://t.me/erlanggakuat" target="_blank">✈️ Telegram</a>
+        <a href="https://www.tiktok.com/@dimas0001" target="_blank">🎵 TikTok</a>
+        <a href="https://www.facebook.com/dimas.enel" target="_blank">👤 Facebook</a>
+        <a href="https://www.instagram.com/dimasenerlangga/" target="_blank">📸 Instagram</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2024 DIMASTROE. All rights reserved.</div>
+    <div class="footer-owner">Dibuat dengan ❤️ oleh <span>Dimas Erlangga</span></div>
+  </div>
+</footer>
+
+<script>
+// HAMBURGER
+var menuOpen=false;
+function toggleMenu(){
+  menuOpen=!menuOpen;
+  document.getElementById('hamBtn').classList.toggle('open',menuOpen);
+  document.getElementById('mobileMenu').classList.toggle('open',menuOpen);
+  document.body.style.overflow=menuOpen?'hidden':'';
+}
+function closeMenu(){
+  menuOpen=false;
+  document.getElementById('hamBtn').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// TOAST
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.innerHTML=msg;t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},3000);
+}
+
+// FILTER
+var judulMap={all:'Semua <em>Produk</em>',fashion:'Koleksi <em>Fashion</em>',aksesoris:'Koleksi <em>Aksesoris</em>',elektronik:'Koleksi <em>Elektronik</em>',kuliner:'Koleksi <em>Kuliner</em>'};
+
+function applyFilter(cat){
+  var cards=document.querySelectorAll('.prod-card[data-cat]');
+  var count=0;
+  cards.forEach(function(c){
+    if(cat==='all'||c.getAttribute('data-cat')===cat){c.classList.remove('hidden');count++;}
+    else{c.classList.add('hidden');}
+  });
+  document.getElementById('noResult').classList.toggle('show',count===0);
+  document.getElementById('produk-judul').innerHTML=judulMap[cat]||judulMap['all'];
+  // update tabs
+  document.querySelectorAll('.ftab').forEach(function(t){
+    var txt=t.textContent.toLowerCase();
+    t.classList.toggle('active',cat==='all'?txt==='semua':txt.includes(cat));
+  });
+  // update badges
+  document.querySelectorAll('.hb').forEach(function(b){
+    var txt=b.textContent.toLowerCase();
+    b.classList.toggle('active',txt.includes(cat));
+  });
+}
+
+function filterTab(el,cat){
+  document.querySelectorAll('.ftab').forEach(function(t){t.classList.remove('active');});
+  el.classList.add('active');
+  applyFilter(cat);
+  document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function filterCategory(cat){
+  applyFilter(cat);
+  document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ORDER
+function order(nama){
+  var msg='Halo Dimas! Saya mau order: *'+nama+'*. Apakah masih tersedia?';
+  window.open('https://wa.me/6281334331776?text='+encodeURIComponent(msg),'_blank');
+  showToast('✅ Membuka WhatsApp untuk order...');
+}
+
+// KIRIM PESAN
+function kirimPesan(){
+  var nama=document.getElementById('f-nama').value||'Pelanggan';
+  var produk=document.getElementById('f-produk').value||'produk';
+  var pesan=document.getElementById('f-pesan').value||'';
+  var msg='Halo Dimas! Nama saya *'+nama+'*. Saya tertarik dengan *'+produk+'*. '+pesan;
+  window.open('https://wa.me/6281334331776?text='+encodeURIComponent(msg),'_blank');
+  showToast('✅ Pesan dikirim via WhatsApp!');
+}
+
+// REVEAL
+var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+// NAV SHADOW
+window.addEventListener('scroll',function(){
+  document.getElementById('navbar').style.boxShadow=window.scrollY>50?'0 4px 24px rgba(0,0,0,0.07)':'none';
+});
+</script>
+</body>
+</html>
