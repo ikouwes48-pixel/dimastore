@@ -233,20 +233,26 @@ footer{background:var(--text);padding:56px;}
 <!-- NAV -->
 <nav id="navbar">
   <div class="nav-logo">
-    <svg width="140" height="36" viewBox="0 0 140 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Monogram icon -->
-      <g transform="translate(0,2)">
-        <!-- I bar left -->
-        <rect x="0" y="0" width="3" height="30" fill="#7a5c3a"/>
-        <!-- S curve shape -->
-        <path d="M5,0 Q16,0 16,8 Q16,15 8,15 Q0,15 0,23 Q0,30 12,30" stroke="#c9813a" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <!-- D shape -->
-        <path d="M14,0 L14,30 Q28,30 28,15 Q28,0 14,0 Z" fill="none" stroke="#7a5c3a" stroke-width="2.5"/>
+    <svg width="170" height="40" viewBox="0 0 170 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Small monogram ISD -->
+      <g transform="translate(2, 4)">
+        <!-- I top serif -->
+        <rect x="-2" y="0" width="12" height="3" fill="#5c3d1e"/>
+        <!-- I vertical -->
+        <rect x="2" y="0" width="5" height="32" fill="#5c3d1e"/>
+        <!-- I bottom serif -->
+        <rect x="-2" y="29" width="12" height="3" fill="#5c3d1e"/>
+        <!-- S curve -->
+        <path d="M9,2 C17,2 20,6 20,11 C20,16 15,14 9,14 C3,14 -0.5,16 -0.5,21 C-0.5,26 4,32 13,32"
+              stroke="#a85c28" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <!-- D bow -->
+        <path d="M11,1 L11,32 C11,32 30,31 30,16.5 C30,2 11,1 11,1 Z"
+              fill="none" stroke="#5c3d1e" stroke-width="3.5" stroke-linejoin="round"/>
       </g>
-      <!-- DIMAS text -->
-      <text x="36" y="24" font-family="'Playfair Display',Georgia,serif" font-weight="900" font-size="18" letter-spacing="1" fill="#4a3520">DIMAS</text>
-      <!-- TROE text in orange -->
-      <text x="95" y="24" font-family="'Playfair Display',Georgia,serif" font-weight="900" font-size="18" letter-spacing="1" fill="#c9813a">TROE</text>
+      <!-- DIMA dark brown -->
+      <text x="42" y="26" font-family="Georgia,serif" font-weight="700" font-size="18" letter-spacing="1.5" fill="#4a3018">DIMA</text>
+      <!-- STORE rust orange -->
+      <text x="96" y="26" font-family="Georgia,serif" font-weight="700" font-size="18" letter-spacing="1.5" fill="#a85c28">STORE</text>
     </svg>
   </div>
   <div class="nav-links">
@@ -266,21 +272,50 @@ footer{background:var(--text);padding:56px;}
   <!-- Logo Brand -->
   <div style="display:flex;justify-content:center;padding:90px 0 0;background:var(--cream);">
     <div style="text-align:center;">
-      <svg width="240" height="185" viewBox="0 0 240 185" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g transform="translate(80,5)">
-          <rect x="0" y="0" width="7" height="82" rx="2" fill="#7a5c3a"/>
-          <path d="M12,2 Q42,2 42,22 Q42,42 16,42 Q-4,42 -4,62 Q-4,82 32,82" stroke="#c9813a" stroke-width="7.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M36,2 L36,82 Q82,80 82,42 Q82,2 36,2 Z" fill="none" stroke="#7a5c3a" stroke-width="6.5" stroke-linejoin="round"/>
+      <svg width="300" height="220" viewBox="0 0 300 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ══ MONOGRAM ISD ══ -->
+        <g transform="translate(105, 6)">
+
+          <!-- I — serif vertical stroke, left -->
+          <!-- top serif -->
+          <rect x="-5" y="0" width="20" height="5" fill="#5c3d1e"/>
+          <!-- vertical bar -->
+          <rect x="3" y="0" width="8" height="88" fill="#5c3d1e"/>
+          <!-- bottom serif -->
+          <rect x="-5" y="83" width="20" height="5" fill="#5c3d1e"/>
+
+          <!-- S — rust orange, elegant S-curve weaving through -->
+          <path d="M17,6 C32,6 38,14 38,24 C38,34 28,31 17,31 C6,31 -1,35 -1,46 C-1,57 8,82 26,82"
+                stroke="#a85c28" stroke-width="8.5" fill="none"
+                stroke-linecap="round"/>
+
+          <!-- D — dark brown, right bow -->
+          <path d="M22,2 L22,86 C22,86 62,84 62,44 C62,4 22,2 22,2 Z"
+                fill="none" stroke="#5c3d1e" stroke-width="6.5" stroke-linejoin="round"/>
         </g>
-        <text x="120" y="130" font-family="'Playfair Display',Georgia,serif" font-weight="900" font-size="33" letter-spacing="3.5" fill="#4a3520" text-anchor="middle">DIMAS<tspan fill="#c9813a">TROE</tspan></text>
-        <line x1="38" y1="141" x2="202" y2="141" stroke="#b09070" stroke-width="0.8"/>
-        <text x="120" y="158" font-family="'DM Sans',sans-serif" font-weight="500" font-size="9" letter-spacing="3.5" fill="#9a7a5a" text-anchor="middle"> PREMIUM STORE </text>
+
+        <!-- DIMASTORE text: DIMA dark, STORE orange -->
+        <text x="150" y="152"
+              font-family="Georgia,'Times New Roman',serif"
+              font-weight="700" font-size="40"
+              letter-spacing="4" fill="#4a3018" text-anchor="middle">DIMA<tspan fill="#a85c28">STORE</tspan></text>
+
+        <!-- thin divider -->
+        <line x1="60" y1="165" x2="240" y2="165" stroke="#c8a882" stroke-width="0.8"/>
+
+        <!-- PREMIUM STORE subtitle -->
+        <text x="150" y="184"
+              font-family="'DM Sans',Arial,sans-serif"
+              font-weight="400" font-size="10"
+              letter-spacing="5" fill="#9a7a5a" text-anchor="middle">PREMIUM STORE</text>
+
       </svg>
     </div>
   </div>
   <div class="hero">
     <div>
-      <div class="hero-tag"><div class="hero-tag-dot"></div>Premium Store</div>
+      <div class="hero-tag"><div class="hero-tag-dot"></div>Premium Store </div>
       <h1 class="hero-title">Belanja <em>Produk</em><span class="line2">Terbaik</span> untuk Kamu.</h1>
       <p class="hero-desc">Dari fashion terkini hingga gadget canggih — <strong>DIMASTORE</strong> hadir dengan produk berkualitas internasional. Dikirim ke seluruh Indonesia. 🇮🇩</p>
       <div class="hero-actions">
@@ -469,7 +504,7 @@ footer{background:var(--text);padding:56px;}
 <footer>
   <div class="footer-inner">
     <div>
-      <div class="footer-brand-logo">DIMAS<span>TROE</span></div>
+      <div class="footer-brand-logo">DIMA<span>STORE</span></div>
       <p class="footer-brand-desc">Toko premium milik Dimas Erlangga — menghadirkan produk berkualitas tinggi untuk kehidupan yang lebih baik.</p>
     </div>
     <div>
@@ -501,7 +536,7 @@ footer{background:var(--text);padding:56px;}
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2024 DIMASTORE All rights reserved.</div>
+    <div class="footer-copy">© 2024 DIMASTORE. All rights reserved.</div>
     <div class="footer-owner">Dibuat dengan ❤️ oleh <span>Dimas Erlangga</span></div>
   </div>
 </footer>
