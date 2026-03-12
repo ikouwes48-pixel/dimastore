@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="ev5YEJHD-9UJ5aAb-rCIRBsvWkuvACoYC5MYxTtIwDw">
 
 <!-- ═══════════════════════════════════════
@@ -102,39 +103,7 @@ a{text-decoration:none;color:inherit;}
 ::-webkit-scrollbar-track{background:var(--cream2);}
 ::-webkit-scrollbar-thumb{background:var(--orange);border-radius:5px;}
 
-/* ═══════════════════════════════════════
-   🆕 FITUR 1: PROMO COUNTDOWN BANNER
-═══════════════════════════════════════ */
-.promo-banner{
-  background:linear-gradient(90deg,#1a1208 0%,#3d1a00 50%,#1a1208 100%);
-  padding:10px 24px;display:flex;align-items:center;justify-content:center;
-  gap:16px;flex-wrap:wrap;position:relative;z-index:1001;
-}
-.promo-text{font-size:12px;font-weight:600;color:rgba(255,255,255,0.85);letter-spacing:0.5px;}
-.promo-text strong{color:var(--orange2);}
-.promo-countdown{display:flex;gap:6px;align-items:center;}
-.cd-block{
-  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.15);
-  border-radius:6px;padding:4px 10px;text-align:center;min-width:42px;
-}
-.cd-num{font-size:16px;font-weight:700;color:white;line-height:1;display:block;}
-.cd-label{font-size:8px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;}
-.cd-sep{color:var(--orange2);font-size:18px;font-weight:700;line-height:1;}
-.promo-pill{
-  background:var(--orange);color:white;font-size:11px;font-weight:700;
-  padding:4px 12px;border-radius:100px;letter-spacing:0.5px;animation:pulse-pill 2s infinite;
-}
-@keyframes pulse-pill{0%,100%{box-shadow:0 0 0 0 rgba(232,96,10,0.4);}50%{box-shadow:0 0 0 6px rgba(232,96,10,0);}}
-.promo-close{
-  position:absolute;right:16px;top:50%;transform:translateY(-50%);
-  color:rgba(255,255,255,0.4);background:none;border:none;cursor:pointer;
-  font-size:16px;line-height:1;padding:4px;
-}
-.promo-close:hover{color:white;}
-
-/* ═══════════════════════════════════════
-   NAV
-═══════════════════════════════════════ */
+/* ═══ NAV ═══ */
 nav{
   position:sticky;top:0;left:0;right:0;z-index:1000;
   padding:0 56px;height:70px;display:flex;align-items:center;
@@ -154,8 +123,6 @@ nav{
   transition:all 0.3s;display:flex;align-items:center;gap:7px;
 }
 .nav-cta:hover{background:var(--orange2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,96,10,0.3);}
-
-/* 🆕 CART BUTTON di nav */
 .nav-cart-btn{
   position:relative;background:var(--cream2);border:1.5px solid var(--border);
   color:var(--text);padding:9px 16px;border-radius:100px;font-size:13px;
@@ -172,7 +139,7 @@ nav{
 }
 .cart-badge.show{opacity:1;transform:scale(1);}
 
-/* HAMBURGER */
+/* ═══ HAMBURGER ═══ */
 .nav-ham{
   display:none;flex-direction:column;justify-content:center;
   gap:5px;cursor:pointer;padding:8px;z-index:1001;border:none;background:none;
@@ -182,7 +149,7 @@ nav{
 .nav-ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
 .nav-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-/* MOBILE MENU */
+/* ═══ MOBILE MENU ═══ */
 .mobile-menu{
   position:fixed;top:70px;left:0;right:0;bottom:0;
   background:rgba(250,248,245,0.98);backdrop-filter:blur(24px);
@@ -196,16 +163,12 @@ nav{
 .mobile-menu a:hover{color:var(--orange);}
 .mobile-menu .m-cta{background:var(--orange);color:white;padding:14px 36px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;margin-top:8px;}
 
-/* ═══════════════════════════════════════
-   🆕 FITUR 2: SEARCH BAR
-═══════════════════════════════════════ */
+/* ═══ SEARCH BAR ═══ */
 .search-section{
   background:var(--cream2);border-bottom:1px solid var(--border);
   padding:18px 56px;display:flex;align-items:center;justify-content:center;
 }
-.search-wrap{
-  position:relative;width:100%;max-width:540px;
-}
+.search-wrap{position:relative;width:100%;max-width:540px;}
 .search-input{
   width:100%;padding:13px 52px 13px 48px;
   background:white;border:1.5px solid var(--border);border-radius:100px;
@@ -214,23 +177,16 @@ nav{
 }
 .search-input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,96,10,0.1);}
 .search-input::placeholder{color:var(--muted);}
-.search-icon{
-  position:absolute;left:18px;top:50%;transform:translateY(-50%);
-  color:var(--muted);font-size:16px;pointer-events:none;
-}
+.search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px;pointer-events:none;}
 .search-clear{
   position:absolute;right:18px;top:50%;transform:translateY(-50%);
   color:var(--muted);font-size:16px;cursor:pointer;
-  background:none;border:none;padding:4px;
-  display:none;transition:color 0.2s;
+  background:none;border:none;padding:4px;display:none;transition:color 0.2s;
 }
 .search-clear:hover{color:var(--orange);}
-.search-result-info{
-  text-align:center;padding:8px;font-size:12px;
-  color:var(--muted);display:none;
-}
+.search-result-info{text-align:center;padding:8px;font-size:12px;color:var(--muted);display:none;}
 
-/* HERO */
+/* ═══ HERO ═══ */
 .hero{
   min-height:100vh;padding:80px 56px 80px;
   display:grid;grid-template-columns:1fr 1fr;
@@ -304,7 +260,7 @@ nav{
 .fc-val{font-size:18px;font-weight:700;color:var(--green);}
 .fc-sub{font-size:10px;color:var(--muted);}
 
-/* MARQUEE */
+/* ═══ MARQUEE ═══ */
 .marquee-wrap{background:var(--orange);padding:14px 0;overflow:hidden;}
 .marquee-track{display:flex;width:max-content;animation:marquee 25s linear infinite;}
 .marquee-item{
@@ -315,7 +271,7 @@ nav{
 .marquee-item span{color:rgba(255,255,255,0.4);font-size:16px;}
 @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-/* CATEGORIES */
+/* ═══ CATEGORIES ═══ */
 .categories{max-width:1280px;margin:0 auto;padding:100px 56px;}
 .sec-label{
   font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
@@ -328,11 +284,7 @@ nav{
 }
 .sec-title em{font-style:italic;color:var(--orange);}
 .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-.cat-card{
-  border-radius:18px;overflow:hidden;cursor:pointer;
-  transition:all 0.35s cubic-bezier(.23,1,.32,1);
-  position:relative;aspect-ratio:3/4;
-}
+.cat-card{border-radius:18px;overflow:hidden;cursor:pointer;transition:all 0.35s cubic-bezier(.23,1,.32,1);position:relative;aspect-ratio:3/4;}
 .cat-card:hover{transform:translateY(-8px);box-shadow:0 20px 48px rgba(0,0,0,0.12);}
 .cat-img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
 .cat-card:hover .cat-img{transform:scale(1.06);}
@@ -340,27 +292,14 @@ nav{
 .cat-info{position:absolute;bottom:0;left:0;right:0;padding:18px 16px;}
 .cat-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:white;margin-bottom:3px;}
 .cat-count{font-size:11px;color:rgba(255,255,255,0.65);font-weight:500;}
-.cat-badge{
-  position:absolute;top:12px;left:12px;background:white;color:var(--orange);
-  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  padding:4px 10px;border-radius:100px;
-}
+.cat-badge{position:absolute;top:12px;left:12px;background:white;color:var(--orange);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:100px;}
 
-/* ═══════════════════════════════════════
-   PRODUCTS + upgrade fitur
-═══════════════════════════════════════ */
+/* ═══ PRODUCTS ═══ */
 .products{background:var(--cream2);padding:100px 56px;}
 .products-inner{max-width:1280px;margin:0 auto;}
-.products-header{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  margin-bottom:48px;flex-wrap:wrap;gap:20px;
-}
+.products-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px;}
 .filter-tabs{display:flex;gap:8px;flex-wrap:wrap;}
-.ftab{
-  padding:8px 18px;border-radius:100px;font-size:12px;font-weight:600;
-  letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;
-  border:1.5px solid var(--border);color:var(--muted);background:white;
-}
+.ftab{padding:8px 18px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;border:1.5px solid var(--border);color:var(--muted);background:white;}
 .ftab.active,.ftab:hover{background:var(--orange);color:white;border-color:var(--orange);}
 .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
 
@@ -368,27 +307,14 @@ nav{
 .prod-card{
   background:white;border-radius:18px;overflow:hidden;
   border:1px solid var(--border);
-  transition:all 0.35s cubic-bezier(.23,1,.32,1);cursor:pointer;
-  position:relative;
+  transition:all 0.35s cubic-bezier(.23,1,.32,1);cursor:pointer;position:relative;
 }
 .prod-card.hidden{display:none;}
 .prod-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.1);border-color:transparent;}
 
-/* 🆕 FITUR 4: STOK HABIS overlay */
-.prod-card.sold-out{opacity:0.75;cursor:default;}
-.prod-card.sold-out:hover{transform:none;box-shadow:none;}
-.sold-out-overlay{
-  position:absolute;inset:0;z-index:5;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(250,248,245,0.65);backdrop-filter:blur(2px);
-  pointer-events:none;
-}
-.sold-out-badge-big{
-  background:var(--red);color:white;font-size:13px;font-weight:700;
-  padding:8px 20px;border-radius:100px;letter-spacing:1px;
-  box-shadow:0 4px 16px rgba(220,38,38,0.35);
-  transform:rotate(-4deg);
-}
+/* ✅ Sold out — simpel, tanpa overlay besar */
+.prod-card.sold-out{opacity:0.6;}
+.prod-card.sold-out:hover{transform:none;box-shadow:none;cursor:default;}
 
 .prod-img{aspect-ratio:1;overflow:hidden;position:relative;background:var(--cream2);}
 .prod-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
@@ -396,180 +322,183 @@ nav{
 .prod-tag{position:absolute;top:10px;left:10px;padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:0.5px;}
 .tag-new{background:#dcfce7;color:var(--green);}
 .tag-hot{background:#fef3c7;color:#92400e;}
-
-/* 🆕 stok badge di gambar */
 .tag-sold{background:#fee2e2;color:var(--red);}
-
 .prod-info{padding:16px;}
 .prod-cat{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
 .prod-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.4;}
 .prod-bottom{display:flex;justify-content:space-between;align-items:center;}
 .prod-price{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--orange);}
 .prod-old{font-size:11px;color:var(--muted);text-decoration:line-through;margin-left:5px;}
-
-/* 🆕 Stok sisa */
-.prod-stock{
-  font-size:10px;font-weight:600;margin-bottom:8px;
-  display:flex;align-items:center;gap:5px;
-}
+.prod-stock{font-size:10px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:5px;}
 .prod-stock.low{color:var(--red);}
 .prod-stock.ok{color:var(--green);}
 .prod-stock .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
 .prod-stock.low .dot{background:var(--red);}
 .prod-stock.ok .dot{background:var(--green);}
-
-/* 🆕 Add to cart button */
-.prod-btn{
-  width:34px;height:34px;border-radius:50%;background:var(--orange);
-  color:white;border:none;font-size:18px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all 0.2s;
-}
+.prod-btn{width:34px;height:34px;border-radius:50%;background:var(--orange);color:white;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
 .prod-btn:hover{background:var(--orange2);transform:scale(1.12);}
 .prod-btn:disabled{background:#ccc;cursor:not-allowed;transform:none;}
-
 .no-result{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);font-size:15px;display:none;}
 .no-result.show{display:block;}
 
-/* ═══════════════════════════════════════
-   🆕 FITUR 3: CART SIDEBAR
-═══════════════════════════════════════ */
-.cart-overlay{
-  position:fixed;inset:0;background:rgba(26,18,8,0.45);
-  backdrop-filter:blur(4px);z-index:2000;
-  opacity:0;pointer-events:none;transition:opacity 0.35s;
-}
+/* ═══ CART SIDEBAR ═══ */
+.cart-overlay{position:fixed;inset:0;background:rgba(26,18,8,0.45);backdrop-filter:blur(4px);z-index:2000;opacity:0;pointer-events:none;transition:opacity 0.35s;}
 .cart-overlay.open{opacity:1;pointer-events:all;}
 .cart-sidebar{
   position:fixed;top:0;right:0;bottom:0;width:400px;max-width:100vw;
-  background:var(--cream);z-index:2001;
-  display:flex;flex-direction:column;
-  transform:translateX(100%);
-  transition:transform 0.45s cubic-bezier(.23,1,.32,1);
+  background:var(--cream);z-index:2001;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform 0.45s cubic-bezier(.23,1,.32,1);
   box-shadow:-8px 0 48px rgba(0,0,0,0.18);
 }
 .cart-sidebar.open{transform:translateX(0);}
-.cart-head{
-  padding:24px 28px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.cart-head-title{
-  font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;
-  display:flex;align-items:center;gap:10px;
-}
-.cart-count-label{
-  background:var(--orange);color:white;font-family:'DM Sans',sans-serif;
-  font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;
-}
-.cart-close{
-  background:var(--cream2);border:1.5px solid var(--border);
-  color:var(--muted);font-size:18px;width:36px;height:36px;
-  border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:all 0.2s;
-}
+.cart-head{padding:24px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.cart-head-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:10px;}
+.cart-count-label{background:var(--orange);color:white;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;}
+.cart-close{background:var(--cream2);border:1.5px solid var(--border);color:var(--muted);font-size:18px;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
 .cart-close:hover{border-color:var(--orange);color:var(--orange);}
 .cart-body{flex:1;overflow-y:auto;padding:20px 28px;}
-.cart-empty{
-  height:100%;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:12px;
-  color:var(--muted);text-align:center;
-}
+.cart-empty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);text-align:center;}
 .cart-empty-icon{font-size:56px;opacity:0.3;}
 .cart-empty p{font-size:14px;line-height:1.6;}
-.cart-item{
-  display:flex;gap:14px;padding:14px 0;
-  border-bottom:1px solid var(--border);
-  animation:fadeUp 0.3s ease both;
-}
-.cart-item-img{
-  width:64px;height:64px;border-radius:12px;object-fit:cover;
-  flex-shrink:0;background:var(--cream2);
-}
+.cart-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);animation:fadeUp 0.3s ease both;}
+.cart-item-img{width:64px;height:64px;border-radius:12px;object-fit:cover;flex-shrink:0;background:var(--cream2);}
 .cart-item-info{flex:1;min-width:0;}
 .cart-item-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;line-height:1.4;}
 .cart-item-cat{font-size:10px;color:var(--orange);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
 .cart-item-row{display:flex;align-items:center;justify-content:space-between;}
 .cart-item-price{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--orange);}
 .cart-qty{display:flex;align-items:center;gap:6px;}
-.qty-btn{
-  width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border);
-  background:white;color:var(--text);font-size:14px;font-weight:700;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:all 0.2s;line-height:1;
-}
+.qty-btn{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;line-height:1;}
 .qty-btn:hover{border-color:var(--orange);color:var(--orange);}
 .qty-num{font-size:13px;font-weight:700;color:var(--text);min-width:20px;text-align:center;}
-.cart-item-del{
-  background:none;border:none;color:#ccc;cursor:pointer;
-  font-size:16px;padding:4px;transition:color 0.2s;flex-shrink:0;
-  align-self:flex-start;
-}
+.cart-item-del{background:none;border:none;color:#ccc;cursor:pointer;font-size:16px;padding:4px;transition:color 0.2s;flex-shrink:0;align-self:flex-start;}
 .cart-item-del:hover{color:var(--red);}
-.cart-foot{
-  padding:20px 28px;border-top:1px solid var(--border);
-  background:white;
-}
-.cart-subtotal{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:6px;
-}
+.cart-foot{padding:20px 28px;border-top:1px solid var(--border);background:white;}
+.cart-subtotal{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .cart-subtotal-label{font-size:13px;color:var(--muted);}
 .cart-subtotal-val{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--text);}
 .cart-items-count{font-size:11px;color:var(--muted);margin-bottom:16px;}
-.cart-checkout-btn{
-  width:100%;background:var(--green);color:white;border:none;
-  padding:15px 24px;border-radius:100px;font-family:'DM Sans',sans-serif;
+.cart-checkout-btn{width:100%;background:var(--green);color:white;border:none;padding:15px 24px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.cart-checkout-btn:hover{background:var(--green2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(45,106,79,0.3);}
+.cart-clear-btn{width:100%;background:none;border:1.5px solid var(--border);color:var(--muted);padding:11px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;margin-top:10px;transition:all 0.2s;}
+.cart-clear-btn:hover{border-color:var(--red);color:var(--red);}
+
+/* ═══ 🆕 MODAL DETAIL PRODUK ═══ */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(26,18,8,0.55);
+  backdrop-filter:blur(6px);z-index:3000;
+  opacity:0;pointer-events:none;transition:opacity 0.35s;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-box{
+  background:var(--cream);border-radius:24px;width:100%;max-width:680px;
+  max-height:90vh;overflow-y:auto;
+  transform:scale(0.92) translateY(20px);
+  transition:transform 0.4s cubic-bezier(.23,1,.32,1);
+  box-shadow:0 24px 80px rgba(0,0,0,0.25);
+}
+.modal-overlay.open .modal-box{transform:scale(1) translateY(0);}
+.modal-img-wrap{width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:24px 24px 0 0;position:relative;}
+.modal-img-wrap img{width:100%;height:100%;object-fit:cover;}
+.modal-close-btn{
+  position:absolute;top:16px;right:16px;
+  background:rgba(250,248,245,0.92);backdrop-filter:blur(8px);
+  border:1.5px solid var(--border);color:var(--text);
+  width:36px;height:36px;border-radius:50%;
+  cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;z-index:1;
+}
+.modal-close-btn:hover{border-color:var(--orange);color:var(--orange);}
+.modal-body{padding:28px 32px 32px;}
+.modal-cat{font-size:10px;font-weight:700;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.modal-name{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:var(--text);margin-bottom:14px;line-height:1.2;}
+.modal-price-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.modal-price{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--orange);}
+.modal-old{font-size:14px;color:var(--muted);text-decoration:line-through;}
+.modal-stock{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600;margin-bottom:20px;}
+.modal-stock.ok{background:#dcfce7;color:var(--green);}
+.modal-stock.low{background:#fff3cd;color:#92400e;}
+.modal-stock.out{background:#fee2e2;color:var(--red);}
+.modal-stock .dot{width:7px;height:7px;border-radius:50%;}
+.modal-stock.ok .dot{background:var(--green);}
+.modal-stock.low .dot{background:#f59e0b;}
+.modal-stock.out .dot{background:var(--red);}
+.modal-desc{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:24px;}
+.modal-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.modal-add-btn{
+  flex:1;background:var(--orange);color:white;border:none;
+  padding:14px 24px;border-radius:100px;font-family:'DM Sans',sans-serif;
   font-size:14px;font-weight:700;cursor:pointer;
   transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.cart-checkout-btn:hover{background:var(--green2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(45,106,79,0.3);}
-.cart-clear-btn{
-  width:100%;background:none;border:1.5px solid var(--border);
-  color:var(--muted);padding:11px;border-radius:100px;
-  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;
-  cursor:pointer;margin-top:10px;transition:all 0.2s;
+.modal-add-btn:hover{background:var(--orange2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,96,10,0.3);}
+.modal-add-btn:disabled{background:#ccc;cursor:not-allowed;transform:none;box-shadow:none;}
+.modal-wa-btn{
+  background:var(--green);color:white;border:none;
+  padding:14px 24px;border-radius:100px;font-family:'DM Sans',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;
+  transition:all 0.3s;display:flex;align-items:center;gap:8px;
 }
-.cart-clear-btn:hover{border-color:var(--red);color:var(--red);}
+.modal-wa-btn:hover{background:var(--green2);transform:translateY(-2px);}
 
-/* TESTIMONIALS */
+/* ═══ 🆕 FLOATING WHATSAPP BUTTON ═══ */
+.wa-float{
+  position:fixed;bottom:88px;right:28px;z-index:1500;
+  background:#25d366;color:white;
+  width:56px;height:56px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;box-shadow:0 8px 28px rgba(37,211,102,0.5);
+  transition:all 0.3s;text-decoration:none;
+}
+.wa-float:hover{transform:scale(1.12);box-shadow:0 12px 36px rgba(37,211,102,0.65);}
+.wa-float-tooltip{
+  position:absolute;right:68px;top:50%;transform:translateY(-50%);
+  background:var(--text);color:white;font-size:12px;font-weight:600;
+  padding:6px 14px;border-radius:100px;white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity 0.2s;
+}
+.wa-float:hover .wa-float-tooltip{opacity:1;}
+
+/* ═══ 🆕 BACK TO TOP BUTTON ═══ */
+.back-top{
+  position:fixed;bottom:28px;right:28px;z-index:1500;
+  background:var(--cream);border:1.5px solid var(--border);color:var(--text);
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;box-shadow:0 4px 16px rgba(0,0,0,0.1);
+  cursor:pointer;transition:all 0.3s;
+  opacity:0;pointer-events:none;transform:translateY(16px);
+}
+.back-top.show{opacity:1;pointer-events:all;transform:translateY(0);}
+.back-top:hover{background:var(--orange);color:white;border-color:var(--orange);transform:translateY(-3px);}
+
+/* ═══ TESTIMONIALS ═══ */
 .testimonials{background:var(--cream2);padding:100px 56px;}
 .testi-inner{max-width:1280px;margin:0 auto;}
 .testi-header{text-align:center;margin-bottom:56px;}
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.testi-card{
-  background:white;border-radius:18px;padding:28px;
-  border:1px solid var(--border);transition:all 0.3s;
-}
+.testi-card{background:white;border-radius:18px;padding:28px;border:1px solid var(--border);transition:all 0.3s;}
 .testi-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.08);}
 .testi-stars{color:#f59e0b;font-size:14px;letter-spacing:2px;margin-bottom:14px;}
 .testi-text{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px;font-style:italic;}
 .testi-author{display:flex;align-items:center;gap:12px;}
-.testi-avatar{
-  width:40px;height:40px;border-radius:50%;
-  background:linear-gradient(135deg,var(--orange),var(--gold));
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;font-weight:700;color:white;flex-shrink:0;
-}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--gold));display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:white;flex-shrink:0;}
 .testi-name{font-size:14px;font-weight:600;color:var(--text);}
 .testi-loc{font-size:11px;color:var(--muted);}
 
-/* CONTACT */
+/* ═══ CONTACT ═══ */
 .contact{max-width:1280px;margin:0 auto;padding:100px 56px;}
 .contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
 .contact-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:16px;}
 .contact-title em{font-style:italic;color:var(--orange);}
 .contact-desc{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:36px;font-weight:300;}
 .sosmed-grid{display:flex;flex-direction:column;gap:12px;}
-.sosmed-card{
-  display:flex;align-items:center;gap:16px;
-  background:var(--cream2);border:1.5px solid var(--border);
-  border-radius:14px;padding:16px 20px;transition:all 0.3s;cursor:pointer;
-}
+.sosmed-card{display:flex;align-items:center;gap:16px;background:var(--cream2);border:1.5px solid var(--border);border-radius:14px;padding:16px 20px;transition:all 0.3s;cursor:pointer;}
 .sosmed-card:hover{border-color:var(--orange);background:rgba(232,96,10,0.04);transform:translateX(6px);}
 .sosmed-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
 .sosmed-ico.wa{background:#dcfce7;}.sosmed-ico.tg{background:#e0f2fe;}
-.sosmed-ico.tt{background:#fce7f3;}.sosmed-ico.fb{background:#eff6ff;}
-.sosmed-ico.ig{background:#fef3c7;}
+.sosmed-ico.tt{background:#fce7f3;}.sosmed-ico.fb{background:#eff6ff;}.sosmed-ico.ig{background:#fef3c7;}
 .sosmed-label{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
 .sosmed-val{font-size:14px;font-weight:600;color:var(--text);}
 .sosmed-arr{margin-left:auto;color:var(--muted);font-size:18px;}
@@ -577,33 +506,18 @@ nav{
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .form-group{display:flex;flex-direction:column;gap:6px;}
 .form-label{font-size:12px;font-weight:600;color:var(--text);letter-spacing:0.3px;}
-.form-input{
-  background:var(--cream2);border:1.5px solid var(--border);
-  border-radius:12px;padding:13px 16px;
-  font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);
-  outline:none;transition:border-color 0.2s;width:100%;
-}
+.form-input{background:var(--cream2);border:1.5px solid var(--border);border-radius:12px;padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color 0.2s;width:100%;}
 .form-input:focus{border-color:var(--orange);}
 .form-input::placeholder{color:var(--muted);}
 textarea.form-input{resize:none;height:110px;}
 .form-error{font-size:11px;color:var(--red);display:none;margin-top:2px;}
 .form-error.show{display:block;}
-.btn-send{
-  background:var(--orange);color:white;border:none;
-  padding:14px 28px;border-radius:100px;
-  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
-  cursor:pointer;transition:all 0.3s;
-  display:flex;align-items:center;gap:8px;width:fit-content;
-}
+.btn-send{background:var(--orange);color:white;border:none;padding:14px 28px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;gap:8px;width:fit-content;}
 .btn-send:hover{background:var(--orange2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,96,10,0.3);}
 
-/* FOOTER */
+/* ═══ FOOTER ═══ */
 footer{background:var(--text);padding:56px;}
-.footer-inner{
-  max-width:1280px;margin:0 auto;
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
-  gap:48px;margin-bottom:48px;
-}
+.footer-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
 .footer-brand-logo{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;letter-spacing:2px;color:white;margin-bottom:14px;}
 .footer-brand-logo span{color:var(--orange);}
 .footer-brand-desc{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.8;font-weight:300;max-width:260px;}
@@ -611,36 +525,23 @@ footer{background:var(--text);padding:56px;}
 .footer-links{display:flex;flex-direction:column;gap:10px;}
 .footer-links a{font-size:13px;color:rgba(255,255,255,0.55);transition:color 0.2s;cursor:pointer;}
 .footer-links a:hover{color:var(--orange);}
-.footer-bottom{
-  max-width:1280px;margin:0 auto;
-  border-top:1px solid rgba(255,255,255,0.08);
-  padding-top:28px;display:flex;justify-content:space-between;align-items:center;
-}
+.footer-bottom{max-width:1280px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.08);padding-top:28px;display:flex;justify-content:space-between;align-items:center;}
 .footer-copy{font-size:12px;color:rgba(255,255,255,0.25);}
 .footer-owner{font-size:12px;color:rgba(255,255,255,0.4);}
 .footer-owner span{color:var(--orange);}
 
-/* TOAST */
-.toast{
-  position:fixed;bottom:32px;left:50%;
-  transform:translateX(-50%) translateY(80px);
-  background:var(--text);color:white;padding:14px 24px;
-  border-radius:100px;font-size:13px;font-weight:500;
-  z-index:9999;opacity:0;
-  transition:all 0.4s cubic-bezier(.23,1,.32,1);
-  white-space:nowrap;pointer-events:none;
-  display:flex;align-items:center;gap:8px;
-}
+/* ═══ TOAST ═══ */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text);color:white;padding:14px 24px;border-radius:100px;font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:all 0.4s cubic-bezier(.23,1,.32,1);white-space:nowrap;pointer-events:none;display:flex;align-items:center;gap:8px;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* ANIMATIONS */
+/* ═══ ANIMATIONS ═══ */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 @keyframes slideIn{from{opacity:0;transform:translateX(40px);}to{opacity:1;transform:translateX(0);}}
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 .reveal-delay-1{transition-delay:0.1s;}.reveal-delay-2{transition-delay:0.2s;}.reveal-delay-3{transition-delay:0.3s;}
 
-/* MOBILE */
+/* ═══ MOBILE ═══ */
 @media(max-width:1024px){
   nav{padding:0 24px;}
   .nav-links{display:none;}
@@ -657,26 +558,49 @@ footer{background:var(--text);padding:56px;}
   .footer-inner{grid-template-columns:1fr 1fr;gap:32px;}
   .footer-bottom{flex-direction:column;gap:10px;text-align:center;}
   .cart-sidebar{width:100vw;}
+  .modal-box{max-width:100%;}
 }
 @media(max-width:600px){
   .product-grid{grid-template-columns:1fr 1fr;}
   .form-row{grid-template-columns:1fr;}
   .footer-inner{grid-template-columns:1fr;}
-  .promo-banner{gap:10px;}
+  .modal-actions{flex-direction:column;}
 }
 </style>
 </head>
 <body>
 
-<!-- ▸ TOAST -->
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- ▸ CART OVERLAY -->
+<!-- CART OVERLAY -->
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 
-<!-- ═══════════════════════════════════════
-     🆕 CART SIDEBAR
-═══════════════════════════════════════ -->
+<!-- 🆕 MODAL OVERLAY -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-img-wrap">
+      <img id="modalImg" src="" alt="">
+      <button class="modal-close-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-cat" id="modalCat"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-price-row">
+        <span class="modal-price" id="modalPrice"></span>
+        <span class="modal-old" id="modalOld"></span>
+      </div>
+      <div class="modal-stock" id="modalStock"><span class="dot"></span><span id="modalStockText"></span></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-actions">
+        <button class="modal-add-btn" id="modalAddBtn" onclick="modalAddToCart()">🛒 Tambah ke Keranjang</button>
+        <button class="modal-wa-btn" id="modalWaBtn" onclick="modalOrderWA()">💬 Pesan via WA</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CART SIDEBAR -->
 <div class="cart-sidebar" id="cartSidebar">
   <div class="cart-head">
     <div class="cart-head-title">
@@ -700,22 +624,6 @@ footer{background:var(--text);padding:56px;}
     <button class="cart-checkout-btn" onclick="checkoutWA()">💬 Pesan via WhatsApp →</button>
     <button class="cart-clear-btn" onclick="clearCart()">🗑 Kosongkan Keranjang</button>
   </div>
-</div>
-
-<!-- ═══════════════════════════════════════
-     🆕 PROMO COUNTDOWN BANNER
-═══════════════════════════════════════ -->
-<div class="promo-banner" id="promoBanner">
-  <div class="promo-text">🔥 <strong>FLASH SALE!</strong> Diskon hingga 40% — Berakhir dalam:</div>
-  <div class="promo-countdown">
-    <div class="cd-block"><span class="cd-num" id="cd-h">00</span><span class="cd-label">Jam</span></div>
-    <span class="cd-sep">:</span>
-    <div class="cd-block"><span class="cd-num" id="cd-m">00</span><span class="cd-label">Menit</span></div>
-    <span class="cd-sep">:</span>
-    <div class="cd-block"><span class="cd-num" id="cd-s">00</span><span class="cd-label">Detik</span></div>
-  </div>
-  <div class="promo-pill">Gunakan kode: DIMAS40</div>
-  <button class="promo-close" onclick="closeBanner()" title="Tutup">✕</button>
 </div>
 
 <!-- MOBILE MENU -->
@@ -749,7 +657,6 @@ footer{background:var(--text);padding:56px;}
     <a href="#contact">Kontak</a>
   </div>
   <div class="nav-right">
-    <!-- 🆕 Cart button -->
     <button class="nav-cart-btn" onclick="openCart()">
       🛒 Keranjang
       <span class="cart-badge" id="cartBadge">0</span>
@@ -761,20 +668,13 @@ footer{background:var(--text);padding:56px;}
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════
-     🆕 SEARCH BAR
-═══════════════════════════════════════ -->
+<!-- SEARCH BAR -->
 <div class="search-section">
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
-    <input
-      type="text"
-      class="search-input"
-      id="searchInput"
+    <input type="text" class="search-input" id="searchInput"
       placeholder="Cari produk... contoh: jaket, earphone, sambal"
-      oninput="handleSearch(this.value)"
-      autocomplete="off"
-    >
+      oninput="handleSearch(this.value)" autocomplete="off">
     <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
   </div>
 </div>
@@ -865,9 +765,7 @@ footer{background:var(--text);padding:56px;}
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     PRODUCTS — with stock & cart
-═══════════════════════════════════════ -->
+<!-- PRODUCTS -->
 <section class="products" id="products">
   <div class="products-inner">
     <div class="products-header reveal">
@@ -886,202 +784,128 @@ footer{background:var(--text);padding:56px;}
     <div class="product-grid" id="productGrid">
 
       <!-- ══ FASHION ══ -->
-      <div class="prod-card" data-cat="fashion" data-name="Sneaker Premium Limited Edition" data-price="450000" data-img="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80">
-        <div class="prod-img">
-          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80" alt="Sneaker">
-          <span class="prod-tag tag-hot">🔥 Hot</span>
-        </div>
+      <div class="prod-card" data-cat="fashion" data-name="Sneaker Premium Limited Edition" data-price="450000" data-old="650000" data-stock="ok" data-stok="12 pcs" data-img="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80" alt="Sneaker"><span class="prod-tag tag-hot">🔥 Hot</span></div>
         <div class="prod-info">
           <div class="prod-cat">Fashion</div>
           <div class="prod-name">Sneaker Premium Limited Edition</div>
           <div class="prod-stock ok"><span class="dot"></span>Stok tersedia · 12 pcs</div>
-          <div class="prod-bottom">
-            <div><span class="prod-price">Rp 450K</span><span class="prod-old">Rp 650K</span></div>
-            <button class="prod-btn" onclick="addToCart(this)">+</button>
-          </div>
+          <div class="prod-bottom"><div><span class="prod-price">Rp 450K</span><span class="prod-old">Rp 650K</span></div><button class="prod-btn" onclick="event.stopPropagation();addToCart(this)">+</button></div>
         </div>
       </div>
 
-      <div class="prod-card" data-cat="fashion" data-name="Jaket Bomber Oversize Premium" data-price="395000" data-img="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80">
-        <div class="prod-img">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Jaket">
-          <span class="prod-tag tag-hot">🔥 Hot</span>
-        </div>
+      <div class="prod-card" data-cat="fashion" data-name="Jaket Bomber Oversize Premium" data-price="395000" data-old="550000" data-stock="low" data-stok="3 pcs" data-img="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Jaket"><span class="prod-tag tag-hot">🔥 Hot</span></div>
         <div class="prod-info">
           <div class="prod-cat">Fashion</div>
           <div class="prod-name">Jaket Bomber Oversize Premium</div>
           <div class="prod-stock low"><span class="dot"></span>Stok terbatas · 3 pcs</div>
-          <div class="prod-bottom">
-            <div><span class="prod-price">Rp 395K</span><span class="prod-old">Rp 550K</span></div>
-            <button class="prod-btn" onclick="addToCart(this)">+</button>
-          </div>
+          <div class="prod-bottom"><div><span class="prod-price">Rp 395K</span><span class="prod-old">Rp 550K</span></div><button class="prod-btn" onclick="event.stopPropagation();addToCart(this)">+</button></div>
         </div>
       </div>
 
-      <!-- 🆕 Produk STOK HABIS -->
-      <div class="prod-card sold-out" data-cat="fashion" data-name="Kaos Oversized Polos Premium" data-price="120000" data-img="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&q=80">
-        <div class="sold-out-overlay"><div class="sold-out-badge-big">📦 Stok Habis</div></div>
-        <div class="prod-img">
-          <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&q=80" alt="Kaos">
-          <span class="prod-tag tag-sold">📦 Habis</span>
-        </div>
+      <!-- ✅ Stok habis — simpel tanpa overlay besar -->
+      <div class="prod-card sold-out" data-cat="fashion" data-name="Kaos Oversized Polos Premium" data-price="120000" data-stock="out" data-stok="Habis" data-img="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&q=80" alt="Kaos"><span class="prod-tag tag-sold">📦 Habis</span></div>
         <div class="prod-info">
           <div class="prod-cat">Fashion</div>
           <div class="prod-name">Kaos Oversized Polos Premium</div>
           <div class="prod-stock low"><span class="dot"></span>Stok habis</div>
-          <div class="prod-bottom">
-            <div><span class="prod-price">Rp 120K</span></div>
-            <button class="prod-btn" disabled title="Stok habis">✕</button>
-          </div>
+          <div class="prod-bottom"><div><span class="prod-price">Rp 120K</span></div><button class="prod-btn" disabled onclick="event.stopPropagation()">✕</button></div>
         </div>
       </div>
 
       <!-- ══ AKSESORIS ══ -->
-      <div class="prod-card" data-cat="aksesoris" data-name="Jam Tangan Analog Klasik" data-price="320000" data-img="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80">
-        <div class="prod-img">
-          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80" alt="Jam">
-          <span class="prod-tag tag-new">✨ Baru</span>
-        </div>
+      <div class="prod-card" data-cat="aksesoris" data-name="Jam Tangan Analog Klasik" data-price="320000" data-stock="ok" data-stok="8 pcs" data-img="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80" alt="Jam"><span class="prod-tag tag-new">✨ Baru</span></div>
         <div class="prod-info">
           <div class="prod-cat">Aksesoris</div>
           <div class="prod-name">Jam Tangan Analog Klasik</div>
           <div class="prod-stock ok"><span class="dot"></span>Stok tersedia · 8 pcs</div>
-          <div class="prod-bottom">
-            <div><span class="prod-price">Rp 320K</span></div>
-            <button class="prod-btn" onclick="addToCart(this)">+</button>
-          </div>
+          <div class="prod-bottom"><div><span class="prod-price">Rp 320K</span></div><button class="prod-btn" onclick="event.stopPropagation();addToCart(this)">+</button></div>
         </div>
       </div>
 
-      <div class="prod-card" data-cat="aksesoris" data-name="Tas Ransel Anti Air Multifungsi" data-price="220000" data-img="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&q=80">
-        <div class="prod-img">
-          <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&q=80" alt="Tas">
-          <span class="prod-tag tag-new">✨ Baru</span>
-        </div>
+      <div class="prod-card" data-cat="aksesoris" data-name="Tas Ransel Anti Air Multifungsi" data-price="220000" data-stock="ok" data-stok="15 pcs" data-img="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&q=80">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&q=80" alt="Tas"><span class="prod-tag tag-new">✨ Baru</span></div>
         <div class="prod-info">
           <div class="prod-cat">Aksesoris</div>
           <div class="prod-name">Tas Ransel Anti Air Multifungsi</div>
           <div class="prod-stock ok"><span class="dot"></span>Stok tersedia · 15 pcs</div>
-          <div class="prod-bottom">
-            <div><span class="prod-price">Rp 220K</span></div>
-            <button class="prod-btn" onclick="addToCart(this)">+</button>
-          </div>
+          <div class="prod-bottom"><div><span class="prod-price">Rp 220K</span></div><button class="prod-btn" onclick="event.stopPropagation();addToCart(this)">+</button></div>
         </div>
       </div>
 
-      <div class="prod-card" data-cat="aksesoris" data-name="Kacamata Retro Anti UV" data-price="95000" data-img="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=400&q=80">
-        <div class="prod-img">
-          <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=400&q=80" alt="Kacamata">
-          <span class="prod-tag tag-hot">🔥 Hot</span>
-        </div>
+      <div class="prod-card" data-cat="aksesoris" data-name="Kacamata Retro Anti UV" data-price="95000" data-old="150000" data-stock="low" data-stok="4 pcs" data-img="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&q=80">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=400&q=80" alt="Kacamata"><span class="prod-tag tag-hot">🔥 Hot</span></div>
         <div class="prod-info">
           <div class="prod-cat">Aksesoris</div>
           <div class="prod-name">Kacamata Retro Anti UV</div>
           <div class="prod-stock low"><span class="dot"></span>Stok terbatas · 4 pcs</div>
-          <div class="prod-bottom">
-            <div><span class="prod-price">Rp 95K</span><span class="prod-old">Rp 150K</span></div>
-            <button class="prod-btn" onclick="addToCart(this)">+</button>
-          </div>
+          <div class="prod-bottom"><div><span class="prod-price">Rp 95K</span><span class="prod-old">Rp 150K</span></div><button class="prod-btn" onclick="event.stopPropagation();addToCart(this)">+</button></div>
         </div>
       </div>
 
       <!-- ══ ELEKTRONIK ══ -->
-      <div class="prod-card" data-cat="elektronik" data-name="Wireless Earphone Pro Max" data-price="280000" data-img="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&q=80">
-        <div class="prod-img">
-          <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&q=80" alt="Earphone">
-          <span class="prod-tag tag-hot">🔥 Hot</span>
-        </div>
+      <div class="prod-card" data-cat="elektronik" data-name="Wireless Earphone Pro Max" data-price="280000" data-old="400000" data-stock="ok" data-stok="20 pcs" data-img="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&q=80" alt="Earphone"><span class="prod-tag tag-hot">🔥 Hot</span></div>
         <div class="prod-info">
           <div class="prod-cat">Elektronik</div>
           <div class="prod-name">Wireless Earphone Pro Max</div>
           <div class="prod-stock ok"><span class="dot"></span>Stok tersedia · 20 pcs</div>
-          <div class="prod-bottom">
-            <div><span class="prod-price">Rp 280K</span><span class="prod-old">Rp 400K</span></div>
-            <button class="prod-btn" onclick="addToCart(this)">+</button>
-          </div>
+          <div class="prod-bottom"><div><span class="prod-price">Rp 280K</span><span class="prod-old">Rp 400K</span></div><button class="prod-btn" onclick="event.stopPropagation();addToCart(this)">+</button></div>
         </div>
       </div>
 
-      <!-- 🆕 Stok habis elektronik -->
-      <div class="prod-card sold-out" data-cat="elektronik" data-name="Powerbank 20.000mAh Fast Charging" data-price="185000" data-img="https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?w=400&q=80">
-        <div class="sold-out-overlay"><div class="sold-out-badge-big">📦 Stok Habis</div></div>
-        <div class="prod-img">
-          <img src="https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?w=400&q=80" alt="Powerbank">
-          <span class="prod-tag tag-sold">📦 Habis</span>
-        </div>
+      <!-- ✅ Stok habis — simpel -->
+      <div class="prod-card sold-out" data-cat="elektronik" data-name="Powerbank 20.000mAh Fast Charging" data-price="185000" data-old="250000" data-stock="out" data-stok="Habis" data-img="https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?w=600&q=80">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?w=400&q=80" alt="Powerbank"><span class="prod-tag tag-sold">📦 Habis</span></div>
         <div class="prod-info">
           <div class="prod-cat">Elektronik</div>
           <div class="prod-name">Powerbank 20.000mAh Fast Charging</div>
           <div class="prod-stock low"><span class="dot"></span>Stok habis</div>
-          <div class="prod-bottom">
-            <div><span class="prod-price">Rp 185K</span><span class="prod-old">Rp 250K</span></div>
-            <button class="prod-btn" disabled>✕</button>
-          </div>
+          <div class="prod-bottom"><div><span class="prod-price">Rp 185K</span><span class="prod-old">Rp 250K</span></div><button class="prod-btn" disabled onclick="event.stopPropagation()">✕</button></div>
         </div>
       </div>
 
-      <div class="prod-card" data-cat="elektronik" data-name="Smartwatch Sport Series 5" data-price="350000" data-img="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&q=80">
-        <div class="prod-img">
-          <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&q=80" alt="Smartwatch">
-          <span class="prod-tag tag-new">✨ Baru</span>
-        </div>
+      <div class="prod-card" data-cat="elektronik" data-name="Smartwatch Sport Series 5" data-price="350000" data-stock="ok" data-stok="7 pcs" data-img="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&q=80" alt="Smartwatch"><span class="prod-tag tag-new">✨ Baru</span></div>
         <div class="prod-info">
           <div class="prod-cat">Elektronik</div>
           <div class="prod-name">Smartwatch Sport Series 5</div>
           <div class="prod-stock ok"><span class="dot"></span>Stok tersedia · 7 pcs</div>
-          <div class="prod-bottom">
-            <div><span class="prod-price">Rp 350K</span></div>
-            <button class="prod-btn" onclick="addToCart(this)">+</button>
-          </div>
+          <div class="prod-bottom"><div><span class="prod-price">Rp 350K</span></div><button class="prod-btn" onclick="event.stopPropagation();addToCart(this)">+</button></div>
         </div>
       </div>
 
       <!-- ══ KULINER ══ -->
-      <div class="prod-card" data-cat="kuliner" data-name="Sambal Medan Spesial Homemade" data-price="75000" data-img="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80">
-        <div class="prod-img">
-          <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80" alt="Kuliner">
-          <span class="prod-tag tag-new">✨ Baru</span>
-        </div>
+      <div class="prod-card" data-cat="kuliner" data-name="Sambal Medan Spesial Homemade" data-price="75000" data-stock="ok" data-stok="30 pcs" data-img="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80" alt="Kuliner"><span class="prod-tag tag-new">✨ Baru</span></div>
         <div class="prod-info">
           <div class="prod-cat">Kuliner</div>
           <div class="prod-name">Sambal Medan Spesial Homemade</div>
           <div class="prod-stock ok"><span class="dot"></span>Stok tersedia · 30 pcs</div>
-          <div class="prod-bottom">
-            <div><span class="prod-price">Rp 75K</span></div>
-            <button class="prod-btn" onclick="addToCart(this)">+</button>
-          </div>
+          <div class="prod-bottom"><div><span class="prod-price">Rp 75K</span></div><button class="prod-btn" onclick="event.stopPropagation();addToCart(this)">+</button></div>
         </div>
       </div>
 
-      <div class="prod-card" data-cat="kuliner" data-name="Kue Bolu Medan Tradisional" data-price="65000" data-img="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80">
-        <div class="prod-img">
-          <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80" alt="Kue">
-          <span class="prod-tag tag-hot">🔥 Hot</span>
-        </div>
+      <div class="prod-card" data-cat="kuliner" data-name="Kue Bolu Medan Tradisional" data-price="65000" data-stock="low" data-stok="5 pcs" data-img="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80" alt="Kue"><span class="prod-tag tag-hot">🔥 Hot</span></div>
         <div class="prod-info">
           <div class="prod-cat">Kuliner</div>
           <div class="prod-name">Kue Bolu Medan Tradisional</div>
           <div class="prod-stock low"><span class="dot"></span>Stok terbatas · 5 pcs</div>
-          <div class="prod-bottom">
-            <div><span class="prod-price">Rp 65K</span></div>
-            <button class="prod-btn" onclick="addToCart(this)">+</button>
-          </div>
+          <div class="prod-bottom"><div><span class="prod-price">Rp 65K</span></div><button class="prod-btn" onclick="event.stopPropagation();addToCart(this)">+</button></div>
         </div>
       </div>
 
-      <div class="prod-card" data-cat="kuliner" data-name="Minuman Herbal Segar Nusantara" data-price="45000" data-img="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&q=80">
-        <div class="prod-img">
-          <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&q=80" alt="Minuman">
-          <span class="prod-tag tag-new">✨ Baru</span>
-        </div>
+      <div class="prod-card" data-cat="kuliner" data-name="Minuman Herbal Segar Nusantara" data-price="45000" data-stock="ok" data-stok="25 pcs" data-img="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=600&q=80">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&q=80" alt="Minuman"><span class="prod-tag tag-new">✨ Baru</span></div>
         <div class="prod-info">
           <div class="prod-cat">Kuliner</div>
           <div class="prod-name">Minuman Herbal Segar Nusantara</div>
           <div class="prod-stock ok"><span class="dot"></span>Stok tersedia · 25 pcs</div>
-          <div class="prod-bottom">
-            <div><span class="prod-price">Rp 45K</span></div>
-            <button class="prod-btn" onclick="addToCart(this)">+</button>
-          </div>
+          <div class="prod-bottom"><div><span class="prod-price">Rp 45K</span></div><button class="prod-btn" onclick="event.stopPropagation();addToCart(this)">+</button></div>
         </div>
       </div>
 
@@ -1125,26 +949,11 @@ footer{background:var(--text);padding:56px;}
       <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:24px;">Kirim <em style="color:var(--orange);">Pesan</em></h3>
       <div class="contact-form">
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Nama *</label>
-            <input type="text" class="form-input" id="f-nama" placeholder="Nama kamu">
-            <span class="form-error" id="err-nama">Nama tidak boleh kosong</span>
-          </div>
-          <div class="form-group">
-            <label class="form-label">No. WhatsApp *</label>
-            <input type="text" class="form-input" id="f-wa" placeholder="08xx">
-            <span class="form-error" id="err-wa">Nomor WA tidak boleh kosong</span>
-          </div>
+          <div class="form-group"><label class="form-label">Nama *</label><input type="text" class="form-input" id="f-nama" placeholder="Nama kamu"><span class="form-error" id="err-nama">Nama tidak boleh kosong</span></div>
+          <div class="form-group"><label class="form-label">No. WhatsApp *</label><input type="text" class="form-input" id="f-wa" placeholder="08xx"><span class="form-error" id="err-wa">Nomor WA tidak boleh kosong</span></div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Produk yang Diminati</label>
-          <input type="text" class="form-input" id="f-produk" placeholder="Contoh: Jaket Bomber, Earphone...">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Pesan *</label>
-          <textarea class="form-input" id="f-pesan" placeholder="Tuliskan pertanyaan atau pesananmu..."></textarea>
-          <span class="form-error" id="err-pesan">Pesan tidak boleh kosong</span>
-        </div>
+        <div class="form-group"><label class="form-label">Produk yang Diminati</label><input type="text" class="form-input" id="f-produk" placeholder="Contoh: Jaket Bomber, Earphone..."></div>
+        <div class="form-group"><label class="form-label">Pesan *</label><textarea class="form-input" id="f-pesan" placeholder="Tuliskan pertanyaan atau pesananmu..."></textarea><span class="form-error" id="err-pesan">Pesan tidak boleh kosong</span></div>
         <button class="btn-send" onclick="kirimPesan()">💬 Kirim via WhatsApp →</button>
       </div>
     </div>
@@ -1192,9 +1001,16 @@ footer{background:var(--text);padding:56px;}
   </div>
 </footer>
 
-<!-- ═══════════════════════════════════════
-     JAVASCRIPT — semua fitur baru
-═══════════════════════════════════════ -->
+<!-- 🆕 FLOATING WHATSAPP BUTTON -->
+<a class="wa-float" href="https://wa.me/6281334331776" target="_blank">
+  💬
+  <span class="wa-float-tooltip">Chat via WhatsApp</span>
+</a>
+
+<!-- 🆕 BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Kembali ke atas">↑</button>
+
+<!-- JAVASCRIPT -->
 <script>
 // ── HAMBURGER ──────────────────────────
 var menuOpen = false;
@@ -1219,44 +1035,84 @@ function showToast(msg) {
   setTimeout(function() { t.classList.remove('show'); }, 3000);
 }
 
-// ── 🆕 PROMO BANNER & COUNTDOWN ────────
-var cdTarget = null;
-function initCountdown() {
-  // Set target: sekarang + 8 jam
-  var saved = localStorage.getItem('dimastore_cd');
-  if (saved) {
-    cdTarget = parseInt(saved);
-  } else {
-    cdTarget = Date.now() + (8 * 3600 + 23 * 60 + 47) * 1000;
-    localStorage.setItem('dimastore_cd', cdTarget);
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-}
-function updateCountdown() {
-  var now = Date.now();
-  var diff = Math.max(0, cdTarget - now);
-  if (diff === 0) {
-    // reset untuk hari berikutnya
-    cdTarget = Date.now() + 8 * 3600 * 1000;
-    localStorage.setItem('dimastore_cd', cdTarget);
-  }
-  var h = Math.floor(diff / 3600000);
-  var m = Math.floor((diff % 3600000) / 60000);
-  var s = Math.floor((diff % 60000) / 1000);
-  document.getElementById('cd-h').textContent = String(h).padStart(2, '0');
-  document.getElementById('cd-m').textContent = String(m).padStart(2, '0');
-  document.getElementById('cd-s').textContent = String(s).padStart(2, '0');
-}
-function closeBanner() {
-  var b = document.getElementById('promoBanner');
-  b.style.transform = 'translateY(-110%)';
-  b.style.transition = 'transform 0.4s ease';
-  setTimeout(function() { b.style.display = 'none'; }, 400);
-}
-initCountdown();
+// ── 🆕 MODAL DETAIL PRODUK ─────────────
+var currentModalCard = null;
+var descs = {
+  fashion: 'Produk fashion pilihan berkualitas premium. Bahan nyaman dipakai seharian, desain modern dan stylish. Cocok untuk berbagai kesempatan dari casual hingga semi-formal.',
+  aksesoris: 'Aksesoris premium yang melengkapi penampilan kamu. Dibuat dari bahan berkualitas tinggi dengan desain elegan dan tahan lama.',
+  elektronik: 'Gadget dan elektronik pilihan dengan teknologi terkini. Performa handal, desain modern, garansi terpercaya. Pengiriman aman ke seluruh Indonesia.',
+  kuliner: 'Kuliner khas Medan yang autentik dan lezat. Dibuat dari bahan-bahan segar pilihan dengan resep turun-temurun. Cocok untuk oleh-oleh atau dikonsumsi sendiri.'
+};
 
-// ── 🆕 KERANJANG BELANJA ───────────────
+function openModal(card) {
+  if (card.classList.contains('hidden')) return;
+  currentModalCard = card;
+
+  var name     = card.getAttribute('data-name');
+  var price    = parseInt(card.getAttribute('data-price'));
+  var oldPrice = card.getAttribute('data-old');
+  var img      = card.getAttribute('data-img');
+  var cat      = card.getAttribute('data-cat');
+  var stock    = card.getAttribute('data-stock') || 'ok';
+  var stokText = card.getAttribute('data-stok') || '';
+  var isSoldOut = card.classList.contains('sold-out');
+
+  document.getElementById('modalImg').src = img;
+  document.getElementById('modalCat').textContent = cat.toUpperCase();
+  document.getElementById('modalName').textContent = name;
+  document.getElementById('modalPrice').textContent = 'Rp ' + price.toLocaleString('id-ID');
+  document.getElementById('modalOld').textContent = oldPrice ? 'Rp ' + parseInt(oldPrice).toLocaleString('id-ID') : '';
+  document.getElementById('modalDesc').textContent = descs[cat] || '';
+
+  var stockEl   = document.getElementById('modalStock');
+  var stockText = document.getElementById('modalStockText');
+  stockEl.className = 'modal-stock ' + (isSoldOut ? 'out' : stock);
+  stockText.textContent = isSoldOut
+    ? 'Stok Habis'
+    : ('Stok ' + (stock === 'ok' ? 'Tersedia' : 'Terbatas') + (stokText ? ' · ' + stokText : ''));
+
+  var addBtn = document.getElementById('modalAddBtn');
+  var waBtn  = document.getElementById('modalWaBtn');
+  addBtn.disabled  = isSoldOut;
+  addBtn.textContent = isSoldOut ? '📦 Stok Habis' : '🛒 Tambah ke Keranjang';
+  waBtn.style.display = isSoldOut ? 'none' : 'flex';
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentModalCard = null;
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function modalAddToCart() {
+  if (!currentModalCard) return;
+  var name  = currentModalCard.getAttribute('data-name');
+  var price = parseInt(currentModalCard.getAttribute('data-price'));
+  var img   = currentModalCard.getAttribute('data-img');
+  var cat   = currentModalCard.getAttribute('data-cat');
+  if (cart[name]) { cart[name].qty += 1; }
+  else { cart[name] = { name: name, price: price, img: img, cat: cat, qty: 1 }; }
+  updateCartUI();
+  showToast('✅ ' + name.substring(0, 28) + '... ditambahkan!');
+  closeModal();
+}
+
+function modalOrderWA() {
+  if (!currentModalCard) return;
+  var name  = currentModalCard.getAttribute('data-name');
+  var price = parseInt(currentModalCard.getAttribute('data-price'));
+  var msg = 'Halo Dimas! Saya tertarik dengan produk *' + name + '* (Rp ' + price.toLocaleString('id-ID') + ').\nApakah masih tersedia? Terima kasih! 🙏';
+  window.open('https://wa.me/6281334331776?text=' + encodeURIComponent(msg), '_blank');
+}
+
+// ── KERANJANG BELANJA ──────────────────
 var cart = {};
 
 function openCart() {
@@ -1271,22 +1127,15 @@ function closeCart() {
 }
 
 function addToCart(btn) {
-  var card = btn.closest('.prod-card');
-  var name = card.getAttribute('data-name');
+  var card  = btn.closest('.prod-card');
+  var name  = card.getAttribute('data-name');
   var price = parseInt(card.getAttribute('data-price'));
-  var img = card.getAttribute('data-img');
-  var cat = card.getAttribute('data-cat');
-
-  if (cart[name]) {
-    cart[name].qty += 1;
-  } else {
-    cart[name] = { name: name, price: price, img: img, cat: cat, qty: 1 };
-  }
-
+  var img   = card.getAttribute('data-img');
+  var cat   = card.getAttribute('data-cat');
+  if (cart[name]) { cart[name].qty += 1; }
+  else { cart[name] = { name: name, price: price, img: img, cat: cat, qty: 1 }; }
   updateCartUI();
   showToast('✅ ' + name.substring(0, 28) + '... ditambahkan!');
-
-  // Animasi button
   btn.textContent = '✓';
   btn.style.background = 'var(--green)';
   setTimeout(function() { btn.textContent = '+'; btn.style.background = ''; }, 1200);
@@ -1295,9 +1144,7 @@ function addToCart(btn) {
 function changeQty(name, delta) {
   if (!cart[name]) return;
   cart[name].qty += delta;
-  if (cart[name].qty <= 0) {
-    delete cart[name];
-  }
+  if (cart[name].qty <= 0) delete cart[name];
   updateCartUI();
 }
 
@@ -1313,39 +1160,33 @@ function clearCart() {
 }
 
 function updateCartUI() {
-  var keys = Object.keys(cart);
-  var totalQty = keys.reduce(function(a, k) { return a + cart[k].qty; }, 0);
+  var keys       = Object.keys(cart);
+  var totalQty   = keys.reduce(function(a, k) { return a + cart[k].qty; }, 0);
   var totalPrice = keys.reduce(function(a, k) { return a + cart[k].price * cart[k].qty; }, 0);
 
-  // Badge di nav
   var badge = document.getElementById('cartBadge');
   badge.textContent = totalQty;
   badge.classList.toggle('show', totalQty > 0);
-
-  // Label di sidebar header
   document.getElementById('cartCountLabel').textContent = totalQty;
 
-  // Body
-  var body = document.getElementById('cartBody');
+  var body  = document.getElementById('cartBody');
   var empty = document.getElementById('cartEmpty');
-  var foot = document.getElementById('cartFoot');
+  var foot  = document.getElementById('cartFoot');
 
   if (keys.length === 0) {
     empty.style.display = 'flex';
-    foot.style.display = 'none';
+    foot.style.display  = 'none';
     body.innerHTML = '';
     body.appendChild(empty);
     return;
   }
-
   empty.style.display = 'none';
-  foot.style.display = 'block';
-
-  // Render items
+  foot.style.display  = 'block';
   body.innerHTML = '';
+
   keys.forEach(function(k) {
     var item = cart[k];
-    var div = document.createElement('div');
+    var div  = document.createElement('div');
     div.className = 'cart-item';
     div.innerHTML =
       '<img class="cart-item-img" src="' + item.img + '" alt="' + item.name + '">' +
@@ -1365,8 +1206,7 @@ function updateCartUI() {
     body.appendChild(div);
   });
 
-  // Total
-  document.getElementById('cartTotal').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
+  document.getElementById('cartTotal').textContent      = 'Rp ' + totalPrice.toLocaleString('id-ID');
   document.getElementById('cartItemsCount').textContent = totalQty + ' produk dalam keranjang';
 }
 
@@ -1385,34 +1225,28 @@ function checkoutWA() {
   showToast('✅ Membuka WhatsApp untuk checkout...');
 }
 
-// ── 🆕 SEARCH BAR ─────────────────────
+// ── SEARCH BAR ─────────────────────────
 var currentCat = 'all';
 
 function handleSearch(val) {
   var clearBtn = document.getElementById('searchClear');
-  var infoEl = document.getElementById('searchInfo');
+  var infoEl   = document.getElementById('searchInfo');
   clearBtn.style.display = val.length > 0 ? 'block' : 'none';
 
-  var q = val.toLowerCase().trim();
+  var q     = val.toLowerCase().trim();
   var cards = document.querySelectorAll('.prod-card[data-cat]');
   var count = 0;
 
   cards.forEach(function(c) {
-    var name = (c.getAttribute('data-name') || '').toLowerCase();
-    var cat = (c.getAttribute('data-cat') || '').toLowerCase();
+    var name     = (c.getAttribute('data-name') || '').toLowerCase();
+    var cat      = (c.getAttribute('data-cat')  || '').toLowerCase();
     var catMatch = currentCat === 'all' || cat === currentCat;
-    var searchMatch = q === '' || name.includes(q) || cat.includes(q);
-    if (catMatch && searchMatch) {
-      c.classList.remove('hidden');
-      count++;
-    } else {
-      c.classList.add('hidden');
-    }
+    var srchMatch = q === '' || name.includes(q) || cat.includes(q);
+    if (catMatch && srchMatch) { c.classList.remove('hidden'); count++; }
+    else { c.classList.add('hidden'); }
   });
 
-  var noResult = document.getElementById('noResult');
-  noResult.classList.toggle('show', count === 0);
-
+  document.getElementById('noResult').classList.toggle('show', count === 0);
   if (q !== '') {
     infoEl.style.display = 'block';
     infoEl.textContent = count > 0
@@ -1426,13 +1260,13 @@ function handleSearch(val) {
 function clearSearch() {
   var input = document.getElementById('searchInput');
   input.value = '';
-  document.getElementById('searchClear').style.display = 'none';
-  document.getElementById('searchInfo').style.display = 'none';
+  document.getElementById('searchClear').style.display  = 'none';
+  document.getElementById('searchInfo').style.display   = 'none';
   handleSearch('');
   input.focus();
 }
 
-// ── FILTER ────────────────────────────
+// ── FILTER ─────────────────────────────
 var judulMap = {
   all: 'Semua <em>Produk</em>',
   fashion: 'Koleksi <em>Fashion</em>',
@@ -1443,21 +1277,17 @@ var judulMap = {
 
 function applyFilter(cat) {
   currentCat = cat;
-  var q = document.getElementById('searchInput').value.toLowerCase().trim();
+  var q     = document.getElementById('searchInput').value.toLowerCase().trim();
   var cards = document.querySelectorAll('.prod-card[data-cat]');
   var count = 0;
 
   cards.forEach(function(c) {
-    var name = (c.getAttribute('data-name') || '').toLowerCase();
-    var cardCat = (c.getAttribute('data-cat') || '').toLowerCase();
+    var name     = (c.getAttribute('data-name') || '').toLowerCase();
+    var cardCat  = (c.getAttribute('data-cat')  || '').toLowerCase();
     var catMatch = cat === 'all' || cardCat === cat;
-    var searchMatch = q === '' || name.includes(q) || cardCat.includes(q);
-    if (catMatch && searchMatch) {
-      c.classList.remove('hidden');
-      count++;
-    } else {
-      c.classList.add('hidden');
-    }
+    var srchMatch = q === '' || name.includes(q) || cardCat.includes(q);
+    if (catMatch && srchMatch) { c.classList.remove('hidden'); count++; }
+    else { c.classList.add('hidden'); }
   });
 
   document.getElementById('noResult').classList.toggle('show', count === 0);
@@ -1468,8 +1298,7 @@ function applyFilter(cat) {
     t.classList.toggle('active', cat === 'all' ? txt === 'semua' : txt.includes(cat));
   });
   document.querySelectorAll('.hb').forEach(function(b) {
-    var txt = b.textContent.toLowerCase();
-    b.classList.toggle('active', txt.includes(cat));
+    b.classList.toggle('active', b.textContent.toLowerCase().includes(cat));
   });
 }
 
@@ -1484,21 +1313,13 @@ function filterCategory(cat) {
 
 // ── KIRIM PESAN + VALIDASI ─────────────
 function kirimPesan() {
-  var nama = document.getElementById('f-nama').value.trim();
-  var wa = document.getElementById('f-wa').value.trim();
+  var nama  = document.getElementById('f-nama').value.trim();
+  var wa    = document.getElementById('f-wa').value.trim();
   var pesan = document.getElementById('f-pesan').value.trim();
-
-  var valid = true;
   document.getElementById('err-nama').classList.toggle('show', !nama);
   document.getElementById('err-wa').classList.toggle('show', !wa);
   document.getElementById('err-pesan').classList.toggle('show', !pesan);
-  if (!nama || !wa || !pesan) { valid = false; }
-
-  if (!valid) {
-    showToast('⚠️ Lengkapi semua field yang wajib diisi');
-    return;
-  }
-
+  if (!nama || !wa || !pesan) { showToast('⚠️ Lengkapi semua field yang wajib diisi'); return; }
   var produk = document.getElementById('f-produk').value || 'produk';
   var msg = 'Halo Dimas! Nama saya *' + nama + '*.\nNo WA: ' + wa + '\nSaya tertarik dengan *' + produk + '*.\n\n' + pesan;
   window.open('https://wa.me/6281334331776?text=' + encodeURIComponent(msg), '_blank');
@@ -1513,13 +1334,27 @@ var io = new IntersectionObserver(function(entries) {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 
-// ── NAV SHADOW ────────────────────────
+// ── NAV SHADOW + BACK TO TOP ───────────
 window.addEventListener('scroll', function() {
   document.getElementById('navbar').style.boxShadow =
     window.scrollY > 50 ? '0 4px 24px rgba(0,0,0,0.07)' : 'none';
+  document.getElementById('backTop').classList.toggle('show', window.scrollY > 400);
 });
 
-// Init cart UI
+// ── KLIK PRODUK BUKA MODAL ─────────────
+document.querySelectorAll('.prod-card[data-cat]').forEach(function(card) {
+  card.addEventListener('click', function(e) {
+    if (e.target.classList.contains('prod-btn')) return;
+    openModal(card);
+  });
+});
+
+// ── ESC TUTUP MODAL / CART ─────────────
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeModal(); closeCart(); }
+});
+
+// Init
 updateCartUI();
 </script>
 </body>
