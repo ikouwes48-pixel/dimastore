@@ -223,9 +223,9 @@ nav{
 .hero-banner{
   border-radius:12px;overflow:hidden;margin-bottom:16px;
   background:linear-gradient(135deg,var(--teal-dark) 0%,var(--teal) 40%,var(--teal2) 70%,#2dd4bf 100%);
-  padding:32px 40px;
-  display:grid;grid-template-columns:1fr 1fr;
-  align-items:center;gap:24px;position:relative;
+  padding:40px 48px;
+  display:grid;grid-template-columns:1.2fr 0.8fr;
+  align-items:center;gap:32px;position:relative;
 }
 .hero-banner::before{
   content:'';position:absolute;inset:0;
@@ -310,16 +310,29 @@ nav{
 }
 .sec-view-all:hover{color:var(--teal-dark);}
 
-/* ═══ FLASH SALE SECTION ═══ */
-.flash-section{background:white;border-radius:12px;padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);}
-.flash-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-.flash-title{display:flex;align-items:center;gap:10px;}
-.flash-ico{font-size:20px;}
-.flash-text{font-size:16px;font-weight:900;color:var(--red);}
-.flash-cd{display:flex;align-items:center;gap:4px;}
-.cd-block{background:var(--red);color:white;font-size:13px;font-weight:900;padding:3px 8px;border-radius:5px;min-width:32px;text-align:center;}
-.cd-sep{color:var(--red);font-weight:900;font-size:14px;}
-.flash-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+/* ═══ CARA PESAN ═══ */
+.cara-pesan-section{background:white;border-radius:12px;padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);}
+.cara-grid{display:flex;align-items:center;gap:8px;margin-top:16px;}
+.cara-card{
+  flex:1;background:var(--teal-light);border-radius:12px;
+  padding:20px 16px;text-align:center;border:1px solid rgba(13,148,136,0.15);
+  transition:all 0.25s;position:relative;
+}
+.cara-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(13,148,136,0.15);}
+.cara-num{
+  position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  background:var(--teal);color:white;width:24px;height:24px;
+  border-radius:50%;font-size:12px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+}
+.cara-ico{font-size:28px;margin-bottom:10px;}
+.cara-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:6px;}
+.cara-desc{font-size:11px;color:var(--muted);line-height:1.6;}
+.cara-arrow{font-size:20px;color:var(--teal);flex-shrink:0;font-weight:900;}
+
+/* ═══ TERJUAL BADGE ═══ */
+.prod-terjual{font-size:10px;color:var(--muted);margin-top:3px;}
+
 
 /* ═══ SEARCH INFO ═══ */
 .search-result-info{text-align:center;padding:8px 24px;font-size:12px;color:var(--muted);display:none;background:var(--teal-light);border-bottom:1px solid var(--border);}
@@ -493,6 +506,13 @@ nav{
 
 /* ═══ TESTIMONIALS ═══ */
 .testi-section{background:white;border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);}
+.testi-empty-state{display:flex;flex-direction:column;align-items:center;padding:36px 20px;text-align:center;gap:10px;}
+.testi-empty-ico{font-size:48px;opacity:0.35;}
+.testi-empty-title{font-size:16px;font-weight:800;color:var(--text);}
+.testi-empty-desc{font-size:13px;color:var(--muted);line-height:1.7;max-width:320px;}
+.testi-empty-btn{margin-top:6px;background:linear-gradient(135deg,var(--teal-dark),var(--teal));color:white;text-decoration:none;padding:10px 22px;border-radius:8px;font-size:13px;font-weight:800;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;}
+.testi-empty-btn:hover{filter:brightness(1.1);transform:translateY(-1px);}
+/* Untuk nanti saat ulasan sudah ada */
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;}
 .testi-card{background:var(--teal-light);border-radius:10px;padding:18px;border:1px solid rgba(13,148,136,0.15);transition:all 0.25s;}
 .testi-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(13,148,136,0.12);}
@@ -589,44 +609,67 @@ footer{background:linear-gradient(135deg,var(--teal-dark) 0%,#134e4a 100%);paddi
 .reveal.visible{opacity:1;transform:translateY(0);}
 .reveal-delay-1{transition-delay:0.1s;}.reveal-delay-2{transition-delay:0.2s;}.reveal-delay-3{transition-delay:0.3s;}
 
-/* ═══ MOBILE ═══ */
-@media(max-width:1024px){
+/* ═══ TABLET (768px - 1100px) ═══ */
+@media(max-width:1100px){
+  nav{padding:10px 20px;gap:12px;}
+  .nav-wa-btn{display:none;}
+  .main-content{padding:14px 20px;}
+  .prod-grid{grid-template-columns:repeat(4,1fr);}
+  .flash-grid{grid-template-columns:repeat(4,1fr);}
+  .hero-banner{padding:28px 32px;}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:24px;padding:0 20px 24px;}
+}
+
+/* ═══ MOBILE (max 768px) ═══ */
+@media(max-width:768px){
   nav{padding:10px 16px;}
   .nav-search{display:none;}
   .nav-ham{display:flex;}
-  .main-content{padding:12px 16px;}
-  .hero-banner{grid-template-columns:1fr;padding:24px;}
+  .nav-wa-btn{display:none;}
+  .mobile-search{display:flex!important;}
+  .main-content{padding:10px 12px;}
+  .hero-banner{grid-template-columns:1fr;padding:20px;}
   .hero-right{display:none;}
-  .promo-row{grid-template-columns:repeat(2,1fr);}
-  .flash-grid{grid-template-columns:repeat(3,1fr);}
-  .prod-grid{grid-template-columns:repeat(3,1fr);}
+  .hero-title{font-size:1.8rem;}
+  .promo-row{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .flash-grid{grid-template-columns:repeat(2,1fr);}
+  .prod-grid{grid-template-columns:repeat(2,1fr);}
   .testi-grid{grid-template-columns:1fr;}
-  .contact-inner{grid-template-columns:1fr;gap:24px;}
-  footer{padding:32px 0 0;}
-  .footer-inner{grid-template-columns:1fr 1fr;gap:24px;padding:0 16px 24px;}
-  .footer-bottom{flex-direction:column;gap:8px;text-align:center;padding:16px;}
+  .contact-inner{grid-template-columns:1fr;gap:20px;}
+  footer{padding:24px 0 0;}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:20px;padding:0 16px 20px;}
+  .footer-bottom{flex-direction:column;gap:8px;text-align:center;padding:14px 16px;}
   .cart-sidebar{width:100vw;}
   .modal-box{max-width:100%;}
-  /* Mobile search bar */
-  .mobile-search{display:flex!important;}
+  .flash-section{padding:14px;}
+  .prod-section{padding:14px;}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:10px;}
+  .cat-strip-inner{padding:10px 12px;}
+  .hero-stats{gap:14px;}
 }
-@media(max-width:600px){
-  .prod-grid{grid-template-columns:repeat(2,1fr);}
-  .flash-grid{grid-template-columns:repeat(2,1fr);}
+
+@media(max-width:480px){
   .promo-row{grid-template-columns:repeat(2,1fr);}
   .form-row{grid-template-columns:1fr;}
   .footer-inner{grid-template-columns:1fr;}
   .modal-actions{flex-direction:column;}
   .hero-btns{flex-direction:column;}
+  .flash-grid{grid-template-columns:repeat(2,1fr);}
+  .nav-logo-sub{display:none;}
+  .hero-stat-label{font-size:9px;}
+  .testi-grid{grid-template-columns:1fr;}
 }
 
 /* Mobile search bar */
 .mobile-search{
   display:none;
   background:linear-gradient(135deg,var(--teal-dark),var(--teal));
-  padding:0 16px 12px;
+  padding:0 12px 12px;
 }
-.mobile-search .nav-search{max-width:100%;display:flex;}
+.mobile-search .nav-search{
+  max-width:100%;display:flex;
+  border-radius:8px;overflow:hidden;
+}
 </style>
 </head>
 <body>
@@ -828,24 +871,33 @@ footer{background:linear-gradient(135deg,var(--teal-dark) 0%,#134e4a 100%);paddi
     </div>
   </div>
 
-  <!-- FLASH SALE -->
-  <div class="flash-section reveal" id="flashSection">
-    <div class="flash-head">
-      <div class="flash-title">
-        <span class="flash-ico">⚡</span>
-        <span class="flash-text">FLASH SALE</span>
+  <!-- CARA PESAN -->
+  <div class="cara-pesan-section reveal">
+    <div class="sec-head">
+      <div class="sec-head-left"><div class="sec-bar"></div><div class="sec-title">Cara Pesan 🛒</div></div>
+    </div>
+    <div class="cara-grid">
+      <div class="cara-card">
+        <div class="cara-num">1</div>
+        <div class="cara-ico">🛍️</div>
+        <div class="cara-title">Pilih Produk</div>
+        <div class="cara-desc">Browsing produk pilihan kami, klik produk untuk lihat detail dan harga.</div>
       </div>
-      <div class="flash-cd">
-        <span style="font-size:11px;color:var(--muted);margin-right:6px;font-weight:700;">Berakhir dalam:</span>
-        <div class="cd-block" id="cd-h">08</div>
-        <span class="cd-sep">:</span>
-        <div class="cd-block" id="cd-m">23</div>
-        <span class="cd-sep">:</span>
-        <div class="cd-block" id="cd-s">47</div>
+      <div class="cara-arrow">→</div>
+      <div class="cara-card">
+        <div class="cara-num">2</div>
+        <div class="cara-ico">💬</div>
+        <div class="cara-title">Chat via WA</div>
+        <div class="cara-desc">Klik tombol WhatsApp, pesanan kamu langsung terkirim ke kami otomatis.</div>
+      </div>
+      <div class="cara-arrow">→</div>
+      <div class="cara-card">
+        <div class="cara-num">3</div>
+        <div class="cara-ico">💳</div>
+        <div class="cara-title">Bayar & Terima</div>
+        <div class="cara-desc">Transfer / COD / QRIS. Barang langsung kami proses dan kirim ke kamu!</div>
       </div>
     </div>
-    <!-- Flash sale cards — 5 produk diskon -->
-    <div class="flash-grid" id="flashGrid"></div>
   </div>
 
   <!-- PRODUCT SECTION -->
@@ -871,6 +923,7 @@ footer{background:linear-gradient(135deg,var(--teal-dark) 0%,#134e4a 100%);paddi
         <div class="prod-info">
           <div class="prod-name">Sneaker Premium Limited Edition</div>
           <div class="prod-price-row"><span class="prod-price">Rp 450K</span><span class="prod-old">Rp 650K</span><span class="prod-disc">-31%</span></div>
+          <div class="prod-terjual">🔥 Terjual 47 pcs</div>
           <div class="prod-meta">
             <div><div class="prod-stok ok">✓ 12 pcs</div><div class="prod-sold-bar-wrap"><div class="prod-sold-bar" style="width:70%"></div></div></div>
             <button class="prod-add-btn" onclick="event.stopPropagation();addToCart(this)">+</button>
@@ -1022,22 +1075,11 @@ footer{background:linear-gradient(135deg,var(--teal-dark) 0%,#134e4a 100%);paddi
     <div class="sec-head">
       <div class="sec-head-left"><div class="sec-bar"></div><div class="sec-title">Ulasan Pelanggan ⭐</div></div>
     </div>
-    <div class="testi-grid">
-      <div class="testi-card reveal reveal-delay-1">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">"Kualitas produknya luar biasa! Jaket yang saya beli sesuai foto, jahitan rapi, bahan tebal. Puas banget dan pasti balik lagi!"</div>
-        <div class="testi-author"><div class="testi-avatar">R</div><div><div class="testi-name">Rizky Pratama</div><div class="testi-loc">📍 Medan, Indonesia</div></div></div>
-      </div>
-      <div class="testi-card reveal reveal-delay-2">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">"Earphone-nya suaranya jernih, bass-nya nendang! Harga murah tapi kualitas premium. Recommended banget beli di DIMASTORE!"</div>
-        <div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#0891b2,#0284c7);">S</div><div><div class="testi-name">Sari Dewi</div><div class="testi-loc">📍 Jakarta, Indonesia</div></div></div>
-      </div>
-      <div class="testi-card reveal reveal-delay-3">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">"Sambal Medan-nya nagih banget! Pedes yang pas, aroma yang khas. Udah order 5 kali dan keluarga saya semua suka!"</div>
-        <div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">A</div><div><div class="testi-name">Ahmad Fauzi</div><div class="testi-loc">📍 Surabaya, Indonesia</div></div></div>
-      </div>
+    <div class="testi-empty-state">
+      <div class="testi-empty-ico">💬</div>
+      <div class="testi-empty-title">Jadilah Pembeli Pertama!</div>
+      <div class="testi-empty-desc">Belum ada ulasan untuk saat ini. Pesan produk dan bagikan pengalamanmu — ulasan kamu akan tampil di sini!</div>
+      <a href="https://wa.me/6281334331776" target="_blank" class="testi-empty-btn">💬 Pesan Sekarang via WA</a>
     </div>
   </div>
 
@@ -1147,67 +1189,6 @@ function showToast(msg) {
   setTimeout(function() { t.classList.remove('show'); }, 2800);
 }
 
-// ── FLASH SALE COUNTDOWN ──────────────
-(function() {
-  var target = Date.now() + (8 * 3600 + 23 * 60 + 47) * 1000;
-  function update() {
-    var diff = Math.max(0, target - Date.now());
-    if (diff === 0) { target = Date.now() + 8 * 3600 * 1000; }
-    var h = Math.floor(diff / 3600000);
-    var m = Math.floor((diff % 3600000) / 60000);
-    var s = Math.floor((diff % 60000) / 1000);
-    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
-    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
-  }
-  update();
-  setInterval(update, 1000);
-})();
-
-// ── FLASH SALE RENDER ─────────────────
-(function() {
-  var flashProds = [
-    {name:'Sneaker Premium',price:450000,old:650000,img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=80',disc:31,cat:'fashion',stock:'ok',stok:'12 pcs'},
-    {name:'Wireless Earphone Pro',price:280000,old:400000,img:'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=300&q=80',disc:30,cat:'elektronik',stock:'ok',stok:'20 pcs'},
-    {name:'Jaket Bomber Oversize',price:395000,old:550000,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=80',disc:28,cat:'fashion',stock:'low',stok:'3 pcs'},
-    {name:'Kacamata Retro Anti UV',price:95000,old:150000,img:'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=300&q=80',disc:37,cat:'aksesoris',stock:'low',stok:'4 pcs'},
-    {name:'Sambal Medan Spesial',price:75000,old:100000,img:'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=300&q=80',disc:25,cat:'kuliner',stock:'ok',stok:'30 pcs'}
-  ];
-  var grid = document.getElementById('flashGrid');
-  flashProds.forEach(function(p) {
-    var card = document.createElement('div');
-    card.className = 'prod-card';
-    card.setAttribute('data-cat', p.cat);
-    card.setAttribute('data-name', p.name);
-    card.setAttribute('data-price', p.price);
-    card.setAttribute('data-old', p.old);
-    card.setAttribute('data-disc', p.disc);
-    card.setAttribute('data-stock', p.stock);
-    card.setAttribute('data-stok', p.stok);
-    card.setAttribute('data-img', p.img);
-    card.innerHTML =
-      '<div class="prod-img"><img src="' + p.img + '" alt="' + p.name + '">' +
-      '<span class="prod-tag tag-sale">-' + p.disc + '%</span></div>' +
-      '<div class="prod-info">' +
-        '<div class="prod-name">' + p.name + '</div>' +
-        '<div class="prod-price-row">' +
-          '<span class="prod-price">Rp ' + (p.price/1000).toFixed(0) + 'K</span>' +
-          '<span class="prod-old">Rp ' + (p.old/1000).toFixed(0) + 'K</span>' +
-        '</div>' +
-        '<div class="prod-meta">' +
-          '<div><div class="prod-stok ' + p.stock + '">' + (p.stock==='ok'?'✓ ':'⚠ ') + p.stok + '</div>' +
-          '<div class="prod-sold-bar-wrap"><div class="prod-sold-bar" style="width:' + (p.disc) + '%"></div></div></div>' +
-          '<button class="prod-add-btn" onclick="event.stopPropagation();addToCart(this)">+</button>' +
-        '</div>' +
-      '</div>';
-    card.addEventListener('click', function(e) {
-      if (e.target.classList.contains('prod-add-btn')) return;
-      openModal(card);
-    });
-    grid.appendChild(card);
-  });
-})();
-
 // ── MODAL ─────────────────────────────
 var currentModalCard = null;
 var descs = {
@@ -1281,6 +1262,7 @@ function modalOrderWA() {
 
 // ── CART ──────────────────────────────
 var cart = {};
+var cartIdCounter = 0;
 function openCart() {
   document.getElementById('cartSidebar').classList.add('open');
   document.getElementById('cartOverlay').classList.add('open');
@@ -1293,25 +1275,32 @@ function closeCart() {
 }
 function addToCart(btn) {
   var card = btn.closest('.prod-card');
-  var name = card.getAttribute('data-name');
+  var name  = card.getAttribute('data-name');
   var price = parseInt(card.getAttribute('data-price'));
-  var img = card.getAttribute('data-img');
-  var cat = card.getAttribute('data-cat');
-  if (cart[name]) { cart[name].qty += 1; }
-  else { cart[name] = {name:name,price:price,img:img,cat:cat,qty:1}; }
+  var img   = card.getAttribute('data-img');
+  var cat   = card.getAttribute('data-cat');
+  // Cari item yang sama berdasarkan nama
+  var found = null;
+  Object.keys(cart).forEach(function(k){ if(cart[k].name===name) found=k; });
+  if (found) {
+    cart[found].qty += 1;
+  } else {
+    var id = 'item_' + (++cartIdCounter);
+    cart[id] = {id:id, name:name, price:price, img:img, cat:cat, qty:1};
+  }
   updateCartUI();
   showToast('✅ ' + name.substring(0,26) + '... ditambahkan!');
   btn.textContent = '✓';
   btn.style.background = 'var(--green)';
-  setTimeout(function() { btn.textContent = '+'; btn.style.background = ''; }, 1200);
+  setTimeout(function(){ btn.textContent='+'; btn.style.background=''; }, 1200);
 }
-function changeQty(name, delta) {
-  if (!cart[name]) return;
-  cart[name].qty += delta;
-  if (cart[name].qty <= 0) delete cart[name];
+function changeQty(id, delta) {
+  if (!cart[id]) return;
+  cart[id].qty += delta;
+  if (cart[id].qty <= 0) delete cart[id];
   updateCartUI();
 }
-function removeItem(name) { delete cart[name]; updateCartUI(); }
+function removeItem(id) { delete cart[id]; updateCartUI(); }
 function clearCart() {
   if (!confirm('Yakin kosongkan keranjang?')) return;
   cart = {};
@@ -1319,46 +1308,62 @@ function clearCart() {
 }
 function updateCartUI() {
   var keys = Object.keys(cart);
-  var totalQty = keys.reduce(function(a,k){return a+cart[k].qty;},0);
-  var totalPrice = keys.reduce(function(a,k){return a+cart[k].price*cart[k].qty;},0);
+  var totalQty   = keys.reduce(function(a,k){ return a+cart[k].qty; }, 0);
+  var totalPrice = keys.reduce(function(a,k){ return a+cart[k].price*cart[k].qty; }, 0);
 
+  // Update badge
   var badge = document.getElementById('cartBadge');
   badge.textContent = totalQty;
   badge.classList.toggle('show', totalQty > 0);
   document.getElementById('cartCountLabel').textContent = totalQty;
 
-  var body = document.getElementById('cartBody');
-  var empty = document.getElementById('cartEmpty');
-  var foot = document.getElementById('cartFoot');
+  var empty    = document.getElementById('cartEmpty');
+  var foot     = document.getElementById('cartFoot');
+  var itemsDiv = document.getElementById('cartItems');
+
+  if (!itemsDiv) {
+    // Buat container items kalau belum ada
+    var newDiv = document.createElement('div');
+    newDiv.id = 'cartItems';
+    empty.parentNode.insertBefore(newDiv, empty);
+    itemsDiv = newDiv;
+  }
 
   if (keys.length === 0) {
-    empty.style.display = 'flex'; foot.style.display = 'none';
-    body.innerHTML = ''; body.appendChild(empty); return;
+    itemsDiv.innerHTML = '';
+    empty.style.display = 'flex';
+    foot.style.display  = 'none';
+    return;
   }
-  empty.style.display = 'none'; foot.style.display = 'block';
-  body.innerHTML = '';
+
+  empty.style.display = 'none';
+  foot.style.display  = 'block';
+  itemsDiv.innerHTML  = '';
+
+  // Tampilkan SEMUA item
   keys.forEach(function(k) {
     var item = cart[k];
-    var div = document.createElement('div');
+    var div  = document.createElement('div');
     div.className = 'cart-item';
     div.innerHTML =
       '<img class="cart-item-img" src="'+item.img+'" alt="'+item.name+'">' +
       '<div class="cart-item-info">' +
-        '<div class="cart-item-cat">'+item.cat+'</div>' +
+        '<div class="cart-item-cat">'+item.cat.toUpperCase()+'</div>' +
         '<div class="cart-item-name">'+item.name+'</div>' +
         '<div class="cart-item-row">' +
           '<span class="cart-item-price">Rp '+(item.price*item.qty).toLocaleString('id-ID')+'</span>' +
           '<div class="cart-qty">' +
-            '<button class="qty-btn" onclick="changeQty(\''+k.replace(/'/g,"\\'")+'\',-1)">−</button>' +
+            '<button class="qty-btn" onclick="changeQty(\''+item.id+'\',-1)">−</button>' +
             '<span class="qty-num">'+item.qty+'</span>' +
-            '<button class="qty-btn" onclick="changeQty(\''+k.replace(/'/g,"\\'")+'\',1)">+</button>' +
+            '<button class="qty-btn" onclick="changeQty(\''+item.id+'\',1)">+</button>' +
           '</div>' +
         '</div>' +
       '</div>' +
-      '<button class="cart-item-del" onclick="removeItem(\''+k.replace(/'/g,"\\'")+'\')" >🗑</button>';
-    body.appendChild(div);
+      '<button class="cart-item-del" onclick="removeItem(\''+item.id+'\')">🗑</button>';
+    itemsDiv.appendChild(div);
   });
-  document.getElementById('cartTotal').textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
+
+  document.getElementById('cartTotal').textContent      = 'Rp ' + totalPrice.toLocaleString('id-ID');
   document.getElementById('cartItemsCount').textContent = totalQty + ' produk dalam keranjang';
 }
 function checkoutWA() {
