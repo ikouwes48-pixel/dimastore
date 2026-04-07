@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIMERLA Console | Merchant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --cream: #faf9f7;
+      --white: #ffffff;
+      --ink: #111111;
+      --ink2: #444444;
+      --ink3: #888888;
+      --sage: #0a7c5c;
+      --sage-light: #e8f5f0;
+      --border: #e8e8e8;
+      --red: #dc2626;
+      --red-light: #fef2f2;
+      --amber: #d97706;
+      --amber-light: #fffbeb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── LOGIN ── */
+    .login-wrap {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--cream);
+      padding: 20px;
+    }
+
+    .login-card {
+      width: 100%; max-width: 420px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 48px 40px;
+      box-shadow: 0 8px 48px rgba(0,0,0,.08);
+    }
+
+    .login-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 400;
+      letter-spacing: 4px; text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .login-logo span { color: var(--sage); }
+
+    .login-sub {
+      text-align: center; font-size: 12px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--ink3); margin-bottom: 40px;
+    }
+
+    .login-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--ink2); margin-bottom: 8px;
+      display: block;
+    }
+
+    .login-input {
+      width: 100%; padding: 14px 18px;
+      background: var(--cream); border: 1.5px solid var(--border);
+      border-radius: 12px; font-family: 'DM Sans', sans-serif;
+      font-size: 15px; color: var(--ink); outline: none;
+      transition: all .2s; margin-bottom: 20px;
+      letter-spacing: 4px; text-align: center;
+    }
+
+    .login-input:focus {
+      border-color: var(--ink); background: var(--white);
+      box-shadow: 0 0 0 4px rgba(0,0,0,.04);
+    }
+
+    .login-btn {
+      width: 100%; padding: 15px;
+      background: var(--ink); color: white;
+      border: none; border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; transition: all .2s;
+    }
+
+    .login-btn:hover {
+      background: var(--sage); transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(10,124,92,.2);
+    }
+
+    .login-err {
+      text-align: center; font-size: 12px;
+      color: var(--red); margin-top: 12px;
+      font-weight: 500; display: none;
+    }
+
+    /* ── DASHBOARD ── */
+    .dashboard { display: none; min-height: 100vh; }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px; height: 68px;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      position: sticky; top: 0; z-index: 50;
+    }
+
+    .topbar-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 400; letter-spacing: 3px;
+    }
+
+    .topbar-logo span { color: var(--sage); }
+
+    .topbar-right {
+      display: flex; align-items: center; gap: 16px;
+    }
+
+    .topbar-status {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600;
+      color: var(--sage); letter-spacing: 1px;
+    }
+
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--sage);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(.8); }
+    }
+
+    .topbar-btn {
+      padding: 8px 18px; border-radius: 8px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      border: 1.5px solid var(--border);
+      background: transparent; color: var(--ink2);
+      cursor: pointer; transition: all .2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .topbar-btn:hover { border-color: var(--red); color: var(--red); }
+
+    /* MAIN CONTENT */
+    .dash-body {
+      max-width: 1400px; margin: 0 auto;
+      padding: 32px 32px 60px;
+    }
+
+    /* STATS CARDS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px; margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 24px;
+      transition: all .2s;
+    }
+
+    .stat-card:hover {
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+      transform: translateY(-1px);
+    }
+
+    .stat-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; margin-bottom: 14px;
+    }
+
+    .stat-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 400; line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--ink3);
+    }
+
+    .stat-sub {
+      font-size: 11px; color: var(--ink3);
+      margin-top: 8px;
+    }
+
+    .stat-sub.positive { color: var(--sage); }
+    .stat-sub.warning { color: var(--amber); }
+    .stat-sub.danger { color: var(--red); }
+
+    /* GRID LAYOUT */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 24px; align-items: start;
+    }
+
+    /* FORM PANEL */
+    .form-panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px;
+      position: sticky; top: 88px;
+    }
+
+    .panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 400;
+      margin-bottom: 6px;
+    }
+
+    .panel-sub {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--ink3); margin-bottom: 24px;
+    }
+
+    .form-group { margin-bottom: 16px; }
+
+    .form-label {
+      display: block; font-size: 11px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--ink2); margin-bottom: 7px;
+    }
+
+    .form-input {
+      width: 100%; padding: 12px 14px;
+      background: var(--cream); border: 1.5px solid var(--border);
+      border-radius: 10px; font-family: 'DM Sans', sans-serif;
+      font-size: 14px; color: var(--ink); outline: none;
+      transition: all .2s;
+    }
+
+    .form-input:focus {
+      border-color: var(--ink); background: var(--white);
+    }
+
+    .form-input::placeholder { color: var(--ink3); }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* IMAGE PREVIEW */
+    .img-preview-wrap {
+      margin-bottom: 16px;
+      border-radius: 12px; overflow: hidden;
+      background: var(--cream); border: 1.5px solid var(--border);
+      aspect-ratio: 4/3; position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .img-preview {
+      width: 100%; height: 100%; object-fit: cover;
+      display: none;
+    }
+
+    .img-preview-placeholder {
+      text-align: center; color: var(--ink3);
+      font-size: 12px;
+    }
+
+    .img-preview-placeholder div { font-size: 28px; margin-bottom: 8px; }
+
+    /* SUBMIT BTN */
+    .submit-btn {
+      width: 100%; padding: 14px;
+      background: var(--ink); color: white;
+      border: none; border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      cursor: pointer; transition: all .2s;
+      margin-bottom: 10px;
+    }
+
+    .submit-btn:hover { background: var(--sage); }
+    .submit-btn:active { transform: scale(.99); }
+
+    .submit-btn.editing { background: var(--sage); }
+
+    .cancel-btn {
+      width: 100%; padding: 11px;
+      background: transparent; color: var(--ink3);
+      border: 1.5px solid var(--border); border-radius: 12px;
+      font-family: 'DM Sans', sans-serif; font-size: 11px;
+      font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; transition: all .2s; display: none;
+    }
+
+    .cancel-btn:hover { border-color: var(--red); color: var(--red); }
+
+    /* TABLE PANEL */
+    .table-panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+    }
+
+    .table-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 12px;
+    }
+
+    .table-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 400;
+    }
+
+    .table-search {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--cream); border: 1.5px solid var(--border);
+      border-radius: 100px; padding: 8px 16px;
+      transition: all .2s;
+    }
+
+    .table-search:focus-within { border-color: var(--ink); }
+
+    .table-search input {
+      border: none; outline: none; background: transparent;
+      font-family: 'DM Sans', sans-serif; font-size: 13px;
+      color: var(--ink); width: 180px;
+    }
+
+    .table-search input::placeholder { color: var(--ink3); }
+
+    table { width: 100%; border-collapse: collapse; }
+
+    thead th {
+      padding: 12px 20px;
+      text-align: left; font-size: 10px;
+      font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--ink3);
+      background: var(--cream); border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--cream); }
+
+    tbody td { padding: 14px 20px; vertical-align: middle; }
+
+    .td-product {
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    .td-img {
+      width: 52px; height: 64px; border-radius: 10px;
+      object-fit: cover; flex-shrink: 0;
+      background: var(--cream); border: 1px solid var(--border);
+    }
+
+    .td-name {
+      font-size: 14px; font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .td-cat {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--sage);
+    }
+
+    .td-price {
+      font-size: 14px; font-weight: 600;
+    }
+
+    .stock-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 100px;
+      font-size: 11px; font-weight: 700;
+    }
+
+    .stock-ok { background: var(--sage-light); color: var(--sage); }
+    .stock-low { background: var(--amber-light); color: var(--amber); }
+    .stock-out { background: var(--red-light); color: var(--red); }
+
+    .action-btn {
+      padding: 6px 14px; border-radius: 8px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .5px; border: none;
+      cursor: pointer; transition: all .2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-edit {
+      background: var(--cream); color: var(--ink);
+      border: 1.5px solid var(--border); margin-right: 6px;
+    }
+
+    .btn-edit:hover { border-color: var(--ink); background: var(--ink); color: white; }
+
+    .btn-delete {
+      background: var(--red-light); color: var(--red);
+    }
+
+    .btn-delete:hover { background: var(--red); color: white; }
+
+    /* EMPTY TABLE */
+    .table-empty {
+      text-align: center; padding: 64px 20px;
+      color: var(--ink3);
+    }
+
+    .table-empty-icon { font-size: 36px; margin-bottom: 12px; }
+    .table-empty-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--ink2); margin-bottom: 6px; }
+    .table-empty-sub { font-size: 13px; }
+
+    /* ALERT */
+    .alert-banner {
+      background: var(--amber-light);
+      border: 1px solid #fcd34d;
+      border-radius: 12px; padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 500; color: var(--amber);
+      display: none;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 32px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--ink); color: white;
+      padding: 12px 24px; border-radius: 100px;
+      font-size: 13px; font-weight: 500;
+      z-index: 999; opacity: 0;
+      transition: all .3s; pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1; transform: translateX(-50%) translateY(0);
+    }
+
+    .toast.success { background: var(--sage); }
+    .toast.error { background: var(--red); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .form-panel { position: static; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .dash-body { padding: 20px 16px 40px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .topbar { padding: 0 16px; }
+      .topbar-status { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div class="login-wrap" id="loginWrap">
+    <div class="login-card">
+      <div class="login-logo">DIMERLA<span>.</span></div>
+      <div class="login-sub">Merchant Console</div>
+      <label class="login-label">Security Key</label>
+      <input type="password" id="pwInput" class="login-input" placeholder="••••••••"
+        onkeydown="if(event.key==='Enter')doLogin()">
+      <button class="login-btn" onclick="doLogin()">Initialize Access</button>
+      <div class="login-err" id="loginErr">⚠️ Incorrect security key</div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard" id="dashboard">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-logo">DIMERLA<span>.</span> <span style="font-family:'DM Sans';font-size:11px;letter-spacing:2px;color:var(--ink3);font-weight:600;margin-left:8px">CONSOLE</span></div>
+      <div class="topbar-right">
+        <div class="topbar-status">
+          <div class="status-dot"></div>
+          System Online
+        </div>
+        <a href="index.html" style="text-decoration:none">
+          <button class="topbar-btn">← View Store</button>
+        </a>
+        <button class="topbar-btn" onclick="doLogout()">Logout</button>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="dash-body">
+
+      <!-- STATS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#f0f9ff">📦</div>
+          <div class="stat-val" id="statTotal">—</div>
+          <div class="stat-label">Total Products</div>
+          <div class="stat-sub" id="statTotalSub"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#e8f5f0">💰</div>
+          <div class="stat-val" id="statValue">—</div>
+          <div class="stat-label">Inventory Value</div>
+          <div class="stat-sub positive" id="statValueSub"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#fffbeb">⚠️</div>
+          <div class="stat-val" id="statLow">—</div>
+          <div class="stat-label">Low Stock</div>
+          <div class="stat-sub warning" id="statLowSub"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#fef2f2">🔴</div>
+          <div class="stat-val" id="statOut">—</div>
+          <div class="stat-label">Sold Out</div>
+          <div class="stat-sub danger" id="statOutSub"></div>
+        </div>
+      </div>
+
+      <!-- ALERT -->
+      <div class="alert-banner" id="alertBanner">
+        ⚠️ <span id="alertText"></span>
+      </div>
+
+      <!-- MAIN GRID -->
+      <div class="main-grid">
+
+        <!-- FORM -->
+        <div class="form-panel">
+          <div class="panel-title" id="formTitle">Add Product</div>
+          <div class="panel-sub" id="formSub">Create new entry</div>
+
+          <input type="hidden" id="editId">
+
+          <!-- IMAGE PREVIEW -->
+          <div class="img-preview-wrap">
+            <img id="imgPreview" class="img-preview" alt="Preview">
+            <div class="img-preview-placeholder" id="imgPlaceholder">
+              <div>🖼️</div>
+              <div>Image preview will appear here</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Image URL</label>
+            <input type="text" id="fImg" class="form-input" placeholder="https://..." oninput="previewImage()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Product Name</label>
+            <input type="text" id="fName" class="form-input" placeholder="e.g. Premium Sneaker">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Price (IDR)</label>
+              <input type="number" id="fPrice" class="form-input" placeholder="450000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Stock</label>
+              <input type="number" id="fStock" class="form-input" placeholder="10">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select id="fCat" class="form-input">
+              <option value="FASHION">Fashion</option>
+              <option value="ELECTRONIC">Electronic</option>
+              <option value="ACCESSORY">Accessory</option>
+              <option value="EXCLUSIVE">Exclusive</option>
+            </select>
+          </div>
+
+          <button class="submit-btn" id="submitBtn" onclick="commitProduct()">Add Product</button>
+          <button class="cancel-btn" id="cancelBtn" onclick="resetForm()">Cancel Edit</button>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-panel">
+          <div class="table-header">
+            <div class="table-title">All Products</div>
+            <div class="table-search">
+              <svg width="13" height="13" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input type="text" id="tableSearch" placeholder="Search..." oninput="filterTable()">
+            </div>
+          </div>
+          <div id="tableWrap">
+            <div class="table-empty">
+              <div class="table-empty-icon">⏳</div>
+              <div class="table-empty-title">Loading...</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const SUPABASE_URL = 'https://clbcalmyotcbxiocorys.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsYmNhbG15b3RjYnhpb2NvcnlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NDgyNTksImV4cCI6MjA5MTEyNDI1OX0.IzEWTUcPCr4t-ZTqvPCqShE2BwRxvBFW1grJvggMhJM';
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let allProducts = [];
+
+    // ── AUTH ──
+    function doLogin() {
+      const pw = document.getElementById('pwInput').value;
+      if (pw === 'DiM3rL@2026!') {
+        document.getElementById('loginWrap').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        loadProducts();
+      } else {
+        document.getElementById('loginErr').style.display = 'block';
+        document.getElementById('pwInput').style.borderColor = '#dc2626';
+      }
+    }
+
+    function doLogout() {
+      document.getElementById('loginWrap').style.display = 'flex';
+      document.getElementById('dashboard').style.display = 'none';
+      document.getElementById('pwInput').value = '';
+      document.getElementById('loginErr').style.display = 'none';
+    }
+
+    // ── PRODUCTS ──
+    async function loadProducts() {
+      const { data } = await _supabase
+        .from('produk_dimastore')
+        .select('*')
+        .order('id', { ascending: false });
+      allProducts = data || [];
+      updateStats();
+      renderTable();
+    }
+
+    function formatPrice(n) {
+      return new Intl.NumberFormat('id-ID', {
+        style: 'currency', currency: 'IDR', minimumFractionDigits: 0
+      }).format(n);
+    }
+
+    function updateStats() {
+      const total = allProducts.length;
+      const value = allProducts.reduce((s, p) => s + (p.harga * p.stok), 0);
+      const low = allProducts.filter(p => p.stok > 0 && p.stok <= 5).length;
+      const out = allProducts.filter(p => p.stok <= 0).length;
+
+      document.getElementById('statTotal').textContent = total;
+      document.getElementById('statTotalSub').textContent = `${allProducts.filter(p=>p.stok>0).length} active`;
+      document.getElementById('statValue').textContent = total > 0 ? `${Math.round(value/1000000)}M` : '0';
+      document.getElementById('statValueSub').textContent = formatPrice(value);
+      document.getElementById('statLow').textContent = low;
+      document.getElementById('statLowSub').textContent = low > 0 ? 'Needs restocking' : 'All stocked';
+      document.getElementById('statOut').textContent = out;
+      document.getElementById('statOutSub').textContent = out > 0 ? 'Unavailable items' : 'All available';
+
+      // Alert banner
+      const alert = document.getElementById('alertBanner');
+      const alertText = document.getElementById('alertText');
+      if (low > 0 || out > 0) {
+        let msg = [];
+        if (low > 0) msg.push(`${low} product${low>1?'s':''} running low on stock`);
+        if (out > 0) msg.push(`${out} product${out>1?'s':''} sold out`);
+        alertText.textContent = msg.join(' · ') + ' — please restock soon!';
+        alert.style.display = 'flex';
+      } else {
+        alert.style.display = 'none';
+      }
+    }
+
+    function filterTable() {
+      const q = document.getElementById('tableSearch').value.toLowerCase();
+      const filtered = allProducts.filter(p =>
+        p.nama_produk.toLowerCase().includes(q) ||
+        p.kategori.toLowerCase().includes(q)
+      );
+      renderTable(filtered);
+    }
+
+    function renderTable(data) {
+      const products = data || allProducts;
+      const wrap = document.getElementById('tableWrap');
+
+      if (products.length === 0) {
+        wrap.innerHTML = `
+          <div class="table-empty">
+            <div class="table-empty-icon">📭</div>
+            <div class="table-empty-title">No products found</div>
+            <div class="table-empty-sub">Add your first product using the form</div>
+          </div>`;
+        return;
+      }
+
+      wrap.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Category</th>
+              <th style="text-align:right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${products.map(p => {
+              const stockClass = p.stok <= 0 ? 'stock-out' : p.stok <= 5 ? 'stock-low' : 'stock-ok';
+              const stockIcon = p.stok <= 0 ? '🔴' : p.stok <= 5 ? '🟡' : '🟢';
+              return `
+              <tr>
+                <td>
+                  <div class="td-product">
+                    <img class="td-img" src="${p.gambar_url}" alt="${p.nama_produk}" onerror="this.src='https://via.placeholder.com/52x64'">
+                    <div>
+                      <div class="td-name">${p.nama_produk}</div>
+                      <div class="td-cat">${p.kategori}</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="td-price">${formatPrice(p.harga)}</td>
+                <td>
+                  <span class="stock-badge ${stockClass}">
+                    ${stockIcon} ${p.stok <= 0 ? 'Sold Out' : p.stok + ' pcs'}
+                  </span>
+                </td>
+                <td><span style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--ink3)">${p.kategori}</span></td>
+                <td style="text-align:right">
+                  <button class="action-btn btn-edit" onclick="editProduct(${p.id},'${p.nama_produk.replace(/'/g,"\\'")}',${p.harga},${p.stok},'${p.kategori}','${p.gambar_url}')">Edit</button>
+                  <button class="action-btn btn-delete" onclick="deleteProduct(${p.id},'${p.nama_produk.replace(/'/g,"\\'")}')">Delete</button>
+                </td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>`;
+    }
+
+    // ── FORM ──
+    function previewImage() {
+      const url = document.getElementById('fImg').value.trim();
+      const preview = document.getElementById('imgPreview');
+      const placeholder = document.getElementById('imgPlaceholder');
+      if (url) {
+        preview.src = url;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+        preview.onerror = () => {
+          preview.style.display = 'none';
+          placeholder.style.display = 'flex';
+        };
+      } else {
+        preview.style.display = 'none';
+        placeholder.style.display = 'flex';
+      }
+    }
+
+    function editProduct(id, name, price, stock, cat, img) {
+      document.getElementById('editId').value = id;
+      document.getElementById('fName').value = name;
+      document.getElementById('fPrice').value = price;
+      document.getElementById('fStock').value = stock;
+      document.getElementById('fCat').value = cat;
+      document.getElementById('fImg').value = img;
+      document.getElementById('formTitle').textContent = 'Edit Product';
+      document.getElementById('formSub').textContent = 'Update existing entry';
+      document.getElementById('submitBtn').textContent = 'Update Product';
+      document.getElementById('submitBtn').classList.add('editing');
+      document.getElementById('cancelBtn').style.display = 'block';
+      previewImage();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetForm() {
+      document.getElementById('editId').value = '';
+      document.getElementById('fName').value = '';
+      document.getElementById('fPrice').value = '';
+      document.getElementById('fStock').value = '';
+      document.getElementById('fImg').value = '';
+      document.getElementById('fCat').value = 'FASHION';
+      document.getElementById('imgPreview').style.display = 'none';
+      document.getElementById('imgPlaceholder').style.display = 'flex';
+      document.getElementById('formTitle').textContent = 'Add Product';
+      document.getElementById('formSub').textContent = 'Create new entry';
+      document.getElementById('submitBtn').textContent = 'Add Product';
+      document.getElementById('submitBtn').classList.remove('editing');
+      document.getElementById('cancelBtn').style.display = 'none';
+    }
+
+    async function commitProduct() {
+      const id = document.getElementById('editId').value;
+      const name = document.getElementById('fName').value.trim();
+      const price = document.getElementById('fPrice').value;
+      const stock = document.getElementById('fStock').value;
+      const cat = document.getElementById('fCat').value;
+      const img = document.getElementById('fImg').value.trim();
+
+      if (!name || !price || !stock || !img) {
+        showToast('Please fill all fields', 'error'); return;
+      }
+
+      const data = {
+        nama_produk: name, harga: parseInt(price),
+        stok: parseInt(stock), kategori: cat,
+        gambar_url: img, link_wa: 'https://wa.me/6281334331776'
+      };
+
+      document.getElementById('submitBtn').textContent = 'Saving...';
+
+      if (id) {
+        await _supabase.from('produk_dimastore').update(data).eq('id', id);
+        showToast('Product updated!', 'success');
+      } else {
+        await _supabase.from('produk_dimastore').insert([data]);
+        showToast('Product added!', 'success');
+      }
+
+      resetForm();
+      loadProducts();
+    }
+
+    async function deleteProduct(id, name) {
+      if (!confirm(`Delete "${name}"?\nThis action cannot be undone.`)) return;
+      await _supabase.from('produk_dimastore').delete().eq('id', id);
+      showToast(`"${name}" deleted`, 'error');
+      loadProducts();
+    }
+
+    // ── TOAST ──
+    function showToast(msg, type = '') {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = `toast ${type} show`;
+      setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    // ── REALTIME ──
+    _supabase.channel('admin')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'produk_dimastore' }, loadProducts)
+      .subscribe();
+  </script>
+</body>
+</html>
