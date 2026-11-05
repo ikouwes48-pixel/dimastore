@@ -1,871 +1,367 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DIMERLA Console | Merchant</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    :root {
-      --cream: #faf9f7;
-      --white: #ffffff;
-      --ink: #111111;
-      --ink2: #444444;
-      --ink3: #888888;
-      --sage: #0a7c5c;
-      --sage-light: #e8f5f0;
-      --border: #e8e8e8;
-      --red: #dc2626;
-      --red-light: #fef2f2;
-      --amber: #d97706;
-      --amber-light: #fffbeb;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── LOGIN ── */
-    .login-wrap {
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--cream);
-      padding: 20px;
-    }
-
-    .login-card {
-      width: 100%; max-width: 420px;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: 48px 40px;
-      box-shadow: 0 8px 48px rgba(0,0,0,.08);
-    }
-
-    .login-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px; font-weight: 400;
-      letter-spacing: 4px; text-align: center;
-      margin-bottom: 6px;
-    }
-
-    .login-logo span { color: var(--sage); }
-
-    .login-sub {
-      text-align: center; font-size: 12px;
-      letter-spacing: 2px; text-transform: uppercase;
-      color: var(--ink3); margin-bottom: 40px;
-    }
-
-    .login-label {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--ink2); margin-bottom: 8px;
-      display: block;
-    }
-
-    .login-input {
-      width: 100%; padding: 14px 18px;
-      background: var(--cream); border: 1.5px solid var(--border);
-      border-radius: 12px; font-family: 'DM Sans', sans-serif;
-      font-size: 15px; color: var(--ink); outline: none;
-      transition: all .2s; margin-bottom: 20px;
-      letter-spacing: 4px; text-align: center;
-    }
-
-    .login-input:focus {
-      border-color: var(--ink); background: var(--white);
-      box-shadow: 0 0 0 4px rgba(0,0,0,.04);
-    }
-
-    .login-btn {
-      width: 100%; padding: 15px;
-      background: var(--ink); color: white;
-      border: none; border-radius: 12px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase;
-      cursor: pointer; transition: all .2s;
-    }
-
-    .login-btn:hover {
-      background: var(--sage); transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(10,124,92,.2);
-    }
-
-    .login-err {
-      text-align: center; font-size: 12px;
-      color: var(--red); margin-top: 12px;
-      font-weight: 500; display: none;
-    }
-
-    /* ── DASHBOARD ── */
-    .dashboard { display: none; min-height: 100vh; }
-
-    /* TOP BAR */
-    .topbar {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      padding: 0 32px; height: 68px;
-      display: flex; align-items: center;
-      justify-content: space-between;
-      position: sticky; top: 0; z-index: 50;
-    }
-
-    .topbar-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-weight: 400; letter-spacing: 3px;
-    }
-
-    .topbar-logo span { color: var(--sage); }
-
-    .topbar-right {
-      display: flex; align-items: center; gap: 16px;
-    }
-
-    .topbar-status {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 11px; font-weight: 600;
-      color: var(--sage); letter-spacing: 1px;
-    }
-
-    .status-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--sage);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .5; transform: scale(.8); }
-    }
-
-    .topbar-btn {
-      padding: 8px 18px; border-radius: 8px;
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase;
-      border: 1.5px solid var(--border);
-      background: transparent; color: var(--ink2);
-      cursor: pointer; transition: all .2s;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    .topbar-btn:hover { border-color: var(--red); color: var(--red); }
-
-    /* MAIN CONTENT */
-    .dash-body {
-      max-width: 1400px; margin: 0 auto;
-      padding: 32px 32px 60px;
-    }
-
-    /* STATS CARDS */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px; margin-bottom: 32px;
-    }
-
-    .stat-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 18px; padding: 24px;
-      transition: all .2s;
-    }
-
-    .stat-card:hover {
-      box-shadow: 0 4px 24px rgba(0,0,0,.06);
-      transform: translateY(-1px);
-    }
-
-    .stat-icon {
-      width: 40px; height: 40px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; margin-bottom: 14px;
-    }
-
-    .stat-val {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px; font-weight: 400; line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .stat-label {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 1px; text-transform: uppercase;
-      color: var(--ink3);
-    }
-
-    .stat-sub {
-      font-size: 11px; color: var(--ink3);
-      margin-top: 8px;
-    }
-
-    .stat-sub.positive { color: var(--sage); }
-    .stat-sub.warning { color: var(--amber); }
-    .stat-sub.danger { color: var(--red); }
-
-    /* GRID LAYOUT */
-    .main-grid {
-      display: grid;
-      grid-template-columns: 380px 1fr;
-      gap: 24px; align-items: start;
-    }
-
-    /* FORM PANEL */
-    .form-panel {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 20px; padding: 28px;
-      position: sticky; top: 88px;
-    }
-
-    .panel-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-weight: 400;
-      margin-bottom: 6px;
-    }
-
-    .panel-sub {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--ink3); margin-bottom: 24px;
-    }
-
-    .form-group { margin-bottom: 16px; }
-
-    .form-label {
-      display: block; font-size: 11px; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase;
-      color: var(--ink2); margin-bottom: 7px;
-    }
-
-    .form-input {
-      width: 100%; padding: 12px 14px;
-      background: var(--cream); border: 1.5px solid var(--border);
-      border-radius: 10px; font-family: 'DM Sans', sans-serif;
-      font-size: 14px; color: var(--ink); outline: none;
-      transition: all .2s;
-    }
-
-    .form-input:focus {
-      border-color: var(--ink); background: var(--white);
-    }
-
-    .form-input::placeholder { color: var(--ink3); }
-
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-    /* IMAGE PREVIEW */
-    .img-preview-wrap {
-      margin-bottom: 16px;
-      border-radius: 12px; overflow: hidden;
-      background: var(--cream); border: 1.5px solid var(--border);
-      aspect-ratio: 4/3; position: relative;
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    .img-preview {
-      width: 100%; height: 100%; object-fit: cover;
-      display: none;
-    }
-
-    .img-preview-placeholder {
-      text-align: center; color: var(--ink3);
-      font-size: 12px;
-    }
-
-    .img-preview-placeholder div { font-size: 28px; margin-bottom: 8px; }
-
-    /* SUBMIT BTN */
-    .submit-btn {
-      width: 100%; padding: 14px;
-      background: var(--ink); color: white;
-      border: none; border-radius: 12px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      cursor: pointer; transition: all .2s;
-      margin-bottom: 10px;
-    }
-
-    .submit-btn:hover { background: var(--sage); }
-    .submit-btn:active { transform: scale(.99); }
-
-    .submit-btn.editing { background: var(--sage); }
-
-    .cancel-btn {
-      width: 100%; padding: 11px;
-      background: transparent; color: var(--ink3);
-      border: 1.5px solid var(--border); border-radius: 12px;
-      font-family: 'DM Sans', sans-serif; font-size: 11px;
-      font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-      cursor: pointer; transition: all .2s; display: none;
-    }
-
-    .cancel-btn:hover { border-color: var(--red); color: var(--red); }
-
-    /* TABLE PANEL */
-    .table-panel {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 20px; overflow: hidden;
-    }
-
-    .table-header {
-      padding: 20px 24px;
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center;
-      justify-content: space-between; gap: 12px;
-    }
-
-    .table-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px; font-weight: 400;
-    }
-
-    .table-search {
-      display: flex; align-items: center; gap: 8px;
-      background: var(--cream); border: 1.5px solid var(--border);
-      border-radius: 100px; padding: 8px 16px;
-      transition: all .2s;
-    }
-
-    .table-search:focus-within { border-color: var(--ink); }
-
-    .table-search input {
-      border: none; outline: none; background: transparent;
-      font-family: 'DM Sans', sans-serif; font-size: 13px;
-      color: var(--ink); width: 180px;
-    }
-
-    .table-search input::placeholder { color: var(--ink3); }
-
-    table { width: 100%; border-collapse: collapse; }
-
-    thead th {
-      padding: 12px 20px;
-      text-align: left; font-size: 10px;
-      font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--ink3);
-      background: var(--cream); border-bottom: 1px solid var(--border);
-    }
-
-    tbody tr {
-      border-bottom: 1px solid var(--border);
-      transition: background .15s;
-    }
-
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: var(--cream); }
-
-    tbody td { padding: 14px 20px; vertical-align: middle; }
-
-    .td-product {
-      display: flex; align-items: center; gap: 12px;
-    }
-
-    .td-img {
-      width: 52px; height: 64px; border-radius: 10px;
-      object-fit: cover; flex-shrink: 0;
-      background: var(--cream); border: 1px solid var(--border);
-    }
-
-    .td-name {
-      font-size: 14px; font-weight: 600;
-      margin-bottom: 3px;
-    }
-
-    .td-cat {
-      font-size: 10px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--sage);
-    }
-
-    .td-price {
-      font-size: 14px; font-weight: 600;
-    }
-
-    .stock-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 4px 10px; border-radius: 100px;
-      font-size: 11px; font-weight: 700;
-    }
-
-    .stock-ok { background: var(--sage-light); color: var(--sage); }
-    .stock-low { background: var(--amber-light); color: var(--amber); }
-    .stock-out { background: var(--red-light); color: var(--red); }
-
-    .action-btn {
-      padding: 6px 14px; border-radius: 8px;
-      font-size: 11px; font-weight: 700;
-      letter-spacing: .5px; border: none;
-      cursor: pointer; transition: all .2s;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    .btn-edit {
-      background: var(--cream); color: var(--ink);
-      border: 1.5px solid var(--border); margin-right: 6px;
-    }
-
-    .btn-edit:hover { border-color: var(--ink); background: var(--ink); color: white; }
-
-    .btn-delete {
-      background: var(--red-light); color: var(--red);
-    }
-
-    .btn-delete:hover { background: var(--red); color: white; }
-
-    /* EMPTY TABLE */
-    .table-empty {
-      text-align: center; padding: 64px 20px;
-      color: var(--ink3);
-    }
-
-    .table-empty-icon { font-size: 36px; margin-bottom: 12px; }
-    .table-empty-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--ink2); margin-bottom: 6px; }
-    .table-empty-sub { font-size: 13px; }
-
-    /* ALERT */
-    .alert-banner {
-      background: var(--amber-light);
-      border: 1px solid #fcd34d;
-      border-radius: 12px; padding: 14px 18px;
-      margin-bottom: 20px;
-      display: flex; align-items: center; gap: 10px;
-      font-size: 13px; font-weight: 500; color: var(--amber);
-      display: none;
-    }
-
-    /* TOAST */
-    .toast {
-      position: fixed; bottom: 32px; left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: var(--ink); color: white;
-      padding: 12px 24px; border-radius: 100px;
-      font-size: 13px; font-weight: 500;
-      z-index: 999; opacity: 0;
-      transition: all .3s; pointer-events: none;
-      white-space: nowrap;
-    }
-
-    .toast.show {
-      opacity: 1; transform: translateX(-50%) translateY(0);
-    }
-
-    .toast.success { background: var(--sage); }
-    .toast.error { background: var(--red); }
-
-    /* RESPONSIVE */
-    @media (max-width: 1024px) {
-      .main-grid { grid-template-columns: 1fr; }
-      .form-panel { position: static; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 640px) {
-      .dash-body { padding: 20px 16px 40px; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .topbar { padding: 0 16px; }
-      .topbar-status { display: none; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DIMERLA Console | Merchant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--black:#0a0a0a;--ink:#1a1a1a;--gray:#6b6b6b;--light:#9a9a9a;--line:#e6e6e6;--soft:#f6f6f6;--white:#fff;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--soft);color:var(--ink);-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+svg.i{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6}
+.hidden{display:none!important}
+.label{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--gray);margin-bottom:8px}
+.input{width:100%;height:46px;padding:0 14px;border:1px solid var(--line);background:var(--white);font:inherit;font-size:14px;outline:none;transition:border-color .2s}
+.input:focus{border-color:var(--black)}
+.btn{height:46px;padding:0 22px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;border:1px solid var(--black);transition:background .2s,color .2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-dark{background:var(--black);color:var(--white)}
+.btn-dark:hover{background:var(--white);color:var(--black)}
+.btn-ghost{background:transparent;border-color:var(--line);color:var(--gray)}
+.btn-ghost:hover{border-color:var(--black);color:var(--black)}
+.btn[disabled]{opacity:.5;pointer-events:none}
+
+/* LOGIN */
+.login{min-height:100vh;display:grid;grid-template-columns:1fr 1fr}
+.login-art{background:var(--black);color:var(--white);padding:56px;display:flex;flex-direction:column;justify-content:space-between}
+.login-art .logo{font-family:var(--serif);font-size:28px;letter-spacing:.32em}
+.login-art h1{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.05}
+.login-art p{color:rgba(255,255,255,.55);font-size:13px;margin-top:16px;max-width:360px}
+.login-form{display:flex;align-items:center;justify-content:center;padding:40px;background:var(--white)}
+.login-form form{width:100%;max-width:360px}
+.login-form h2{font-family:var(--serif);font-weight:400;font-size:34px;margin-bottom:6px}
+.login-form .sub{color:var(--gray);font-size:13px;margin-bottom:36px}
+.fg{margin-bottom:18px}
+.err{font-size:13px;color:var(--black);background:var(--soft);border-left:2px solid var(--black);padding:10px 12px;margin-bottom:18px}
+.login-form .btn{width:100%;margin-top:8px}
+.back{display:block;margin-top:24px;font-size:12px;color:var(--gray);text-decoration:none;text-align:center}
+.back:hover{color:var(--black)}
+
+/* DASHBOARD */
+.top{background:var(--white);border-bottom:1px solid var(--line);height:64px;position:sticky;top:0;z-index:20}
+.top-in{max-width:1400px;margin:0 auto;padding:0 32px;height:100%;display:flex;align-items:center;justify-content:space-between}
+.top .logo{font-family:var(--serif);font-size:22px;letter-spacing:.3em}
+.top .logo small{font-family:var(--sans);font-size:10px;letter-spacing:.2em;color:var(--gray);margin-left:12px;text-transform:uppercase}
+.top-right{display:flex;align-items:center;gap:20px;font-size:12px;color:var(--gray)}
+.live{display:flex;align-items:center;gap:6px}
+.live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--black)}
+.top .btn{height:36px;padding:0 16px}
+.body{max-width:1400px;margin:0 auto;padding:32px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:24px}
+.stat{background:var(--white);padding:24px}
+.stat .v{font-family:var(--serif);font-size:38px;font-weight:400;line-height:1;margin:10px 0 6px}
+.stat .s{font-size:12px;color:var(--gray)}
+.alert{display:flex;align-items:center;gap:12px;background:var(--black);color:var(--white);padding:14px 20px;font-size:13px;margin-bottom:24px}
+.layout{display:grid;grid-template-columns:380px 1fr;gap:24px;align-items:start}
+.panel{background:var(--white);border:1px solid var(--line)}
+.panel-h{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.panel-h h3{font-family:var(--serif);font-weight:400;font-size:24px}
+.panel-h .label{margin:4px 0 0}
+.form{padding:24px;position:sticky;top:88px}
+.form-panel{position:sticky;top:88px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.preview{aspect-ratio:4/3;background:var(--soft);border:1px solid var(--line);margin-bottom:18px;display:flex;align-items:center;justify-content:center;overflow:hidden;color:var(--light);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.preview img{width:100%;height:100%;object-fit:cover}
+.form .btn{width:100%}
+.form .btn+.btn{margin-top:10px}
+textarea.input{height:84px;padding:12px 14px;resize:vertical}
+.tsearch{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:0 12px;height:38px;min-width:240px}
+.tsearch input{border:none;outline:none;font:inherit;font-size:13px;width:100%}
+.tsearch:focus-within{border-color:var(--black)}
+table{width:100%;border-collapse:collapse}
+th{font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--gray);text-align:left;padding:14px 24px;border-bottom:1px solid var(--line);background:var(--soft)}
+td{padding:14px 24px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#fafafa}
+.prod{display:flex;align-items:center;gap:14px}
+.prod img{width:44px;height:56px;object-fit:cover;background:var(--soft)}
+.prod .n{font-weight:500}
+.prod .c{font-size:11px;color:var(--gray);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+.stock{font-size:12px;display:inline-flex;align-items:center;gap:8px}
+.stock::before{content:'';width:6px;height:6px;border-radius:50%;border:1px solid var(--black)}
+.stock.ok::before{background:var(--black)}
+.stock.low::before{background:linear-gradient(90deg,var(--black) 50%,transparent 50%)}
+.stock.out{color:var(--light)}
+.act{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);padding:6px 8px}
+.act:hover{color:var(--black);text-decoration:underline;text-underline-offset:4px}
+.empty{padding:80px 24px;text-align:center;color:var(--gray)}
+.empty h4{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--ink);margin-bottom:6px}
+.toast{position:fixed;right:24px;bottom:24px;background:var(--black);color:var(--white);padding:14px 22px;font-size:13px;opacity:0;transform:translateY(12px);transition:all .3s;z-index:50;pointer-events:none}
+.toast.on{opacity:1;transform:none}
+.confirm{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:40;padding:24px}
+.confirm-box{background:var(--white);padding:32px;max-width:400px;width:100%}
+.confirm-box h4{font-family:var(--serif);font-weight:400;font-size:26px;margin-bottom:8px}
+.confirm-box p{color:var(--gray);font-size:14px;margin-bottom:24px}
+.confirm-box div{display:flex;gap:10px;justify-content:flex-end}
+.table-wrap{overflow-x:auto}
+@media (max-width:1100px){.layout{grid-template-columns:1fr}.form-panel{position:static}.stats{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){.login{grid-template-columns:1fr}.login-art{display:none}.body,.top-in{padding-left:16px;padding-right:16px}.live{display:none}.tsearch{min-width:0;width:100%}.panel-h{flex-wrap:wrap}th:nth-child(4),td:nth-child(4){display:none}}
+</style>
+<style id="color-theme">:root{--sage:#0a7c5c;--sage2:#0d9e75;--sage-bg:#e8f5f0;--sage-mid:#b8ead8;--cream:#faf9f7;--amber:#d97706;--red:#dc2626;--black:#111111;--line:#e8e8e4}
+::selection{background:var(--sage-mid)}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:var(--sage);border-radius:4px}
+.btn{border-radius:10px}
+body{background:var(--cream)}
+.input{border-radius:10px}.input:focus,.tsearch:focus-within{border-color:var(--sage);box-shadow:0 0 0 3px var(--sage-bg)}
+.btn-dark{background:var(--sage);border-color:var(--sage);color:#fff}
+.btn-dark:hover{background:var(--sage2);color:#fff;border-color:var(--sage2)}
+.btn-ghost:hover{border-color:var(--sage);color:var(--sage)}
+.login-art{background:linear-gradient(150deg,#0a7c5c,#064d39)}
+.err{color:var(--red);background:#fef2f2;border-left-color:var(--red)}
+.live{color:var(--sage)}.live::before{background:var(--sage)}
+.top .logo small{color:var(--sage)}
+.stats{background:transparent;border:none;gap:16px}
+.stat{border-radius:14px;border:1px solid var(--line);border-top:3px solid var(--sage)}
+.stat:nth-child(2){border-top-color:var(--sage2)}.stat:nth-child(3){border-top-color:var(--amber)}.stat:nth-child(4){border-top-color:var(--red)}
+.alert{background:#fffbeb;color:#92400e;border:1px solid #fcd34d;border-radius:10px}
+.panel{border-radius:14px;overflow:hidden}
+tbody tr:hover{background:var(--sage-bg)}
+.tsearch{border-radius:10px}
+</style>
 </head>
 <body>
 
-  <!-- LOGIN -->
-  <div class="login-wrap" id="loginWrap">
-    <div class="login-card">
-      <div class="login-logo">DIMERLA<span>.</span></div>
-      <div class="login-sub">Merchant Console</div>
-      <label class="login-label">Security Key</label>
-      <input type="password" id="pwInput" class="login-input" placeholder="••••••••"
-        onkeydown="if(event.key==='Enter')doLogin()">
-      <button class="login-btn" onclick="doLogin()">Initialize Access</button>
-      <div class="login-err" id="loginErr">⚠️ Incorrect security key</div>
+<!-- LOGIN -->
+<section class="login" id="loginView">
+  <div class="login-art">
+    <div class="logo">DIMERLA</div>
+    <div>
+      <h1>Merchant<br>Console</h1>
+      <p>Kelola katalog, harga, dan stok toko Anda. Setiap perubahan langsung tampil di toko online.</p>
     </div>
+    <div class="label" style="color:rgba(255,255,255,.4)">&copy; 2026 DIMERLA</div>
   </div>
+  <div class="login-form">
+    <form id="loginForm" novalidate>
+      <h2>Masuk</h2>
+      <p class="sub">Gunakan akun merchant yang telah terdaftar.</p>
+      <div class="err hidden" id="loginErr"></div>
+      <div class="fg"><label class="label" for="email">Email</label><input class="input" id="email" type="email" autocomplete="username" required></div>
+      <div class="fg"><label class="label" for="password">Kata Sandi</label><input class="input" id="password" type="password" autocomplete="current-password" required></div>
+      <button class="btn btn-dark" id="loginBtn" type="submit">Masuk</button>
+      <a class="back" href="index.html">Kembali ke toko</a>
+    </form>
+  </div>
+</section>
 
-  <!-- DASHBOARD -->
-  <div class="dashboard" id="dashboard">
+<!-- DASHBOARD -->
+<section class="hidden" id="dashView">
+  <header class="top"><div class="top-in">
+    <div class="logo">DIMERLA<small>Console</small></div>
+    <div class="top-right">
+      <span class="live">Tersinkron</span>
+      <span id="userEmail"></span>
+      <button class="btn btn-ghost" onclick="logout()">Keluar</button>
+    </div>
+  </div></header>
 
-    <!-- TOPBAR -->
-    <div class="topbar">
-      <div class="topbar-logo">DIMERLA<span>.</span> <span style="font-family:'DM Sans';font-size:11px;letter-spacing:2px;color:var(--ink3);font-weight:600;margin-left:8px">CONSOLE</span></div>
-      <div class="topbar-right">
-        <div class="topbar-status">
-          <div class="status-dot"></div>
-          System Online
-        </div>
-        <a href="index.html" style="text-decoration:none">
-          <button class="topbar-btn">← View Store</button>
-        </a>
-        <button class="topbar-btn" onclick="doLogout()">Logout</button>
-      </div>
+  <main class="body">
+    <div class="stats">
+      <div class="stat"><span class="label">Total Produk</span><div class="v" id="sTotal">0</div><div class="s" id="sTotalSub">&nbsp;</div></div>
+      <div class="stat"><span class="label">Nilai Inventaris</span><div class="v" id="sValue">0</div><div class="s" id="sValueSub">&nbsp;</div></div>
+      <div class="stat"><span class="label">Stok Menipis</span><div class="v" id="sLow">0</div><div class="s">Stok 1 hingga 5</div></div>
+      <div class="stat"><span class="label">Stok Habis</span><div class="v" id="sOut">0</div><div class="s">Tidak tampil untuk dibeli</div></div>
     </div>
 
-    <!-- BODY -->
-    <div class="dash-body">
+    <div class="alert hidden" id="alert">
+      <svg class="i" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+      <span id="alertText"></span>
+    </div>
 
-      <!-- STATS -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon" style="background:#f0f9ff">📦</div>
-          <div class="stat-val" id="statTotal">—</div>
-          <div class="stat-label">Total Products</div>
-          <div class="stat-sub" id="statTotalSub"></div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background:#e8f5f0">💰</div>
-          <div class="stat-val" id="statValue">—</div>
-          <div class="stat-label">Inventory Value</div>
-          <div class="stat-sub positive" id="statValueSub"></div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background:#fffbeb">⚠️</div>
-          <div class="stat-val" id="statLow">—</div>
-          <div class="stat-label">Low Stock</div>
-          <div class="stat-sub warning" id="statLowSub"></div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background:#fef2f2">🔴</div>
-          <div class="stat-val" id="statOut">—</div>
-          <div class="stat-label">Sold Out</div>
-          <div class="stat-sub danger" id="statOutSub"></div>
-        </div>
-      </div>
-
-      <!-- ALERT -->
-      <div class="alert-banner" id="alertBanner">
-        ⚠️ <span id="alertText"></span>
-      </div>
-
-      <!-- MAIN GRID -->
-      <div class="main-grid">
-
-        <!-- FORM -->
-        <div class="form-panel">
-          <div class="panel-title" id="formTitle">Add Product</div>
-          <div class="panel-sub" id="formSub">Create new entry</div>
-
-          <input type="hidden" id="editId">
-
-          <!-- IMAGE PREVIEW -->
-          <div class="img-preview-wrap">
-            <img id="imgPreview" class="img-preview" alt="Preview">
-            <div class="img-preview-placeholder" id="imgPlaceholder">
-              <div>🖼️</div>
-              <div>Image preview will appear here</div>
-            </div>
+    <div class="layout">
+      <div class="panel form-panel">
+        <div class="panel-h"><div><h3 id="formTitle">Tambah Produk</h3><span class="label" id="formSub">Entri baru</span></div></div>
+        <form class="form" id="prodForm" novalidate>
+          <input type="hidden" id="fId">
+          <div class="preview" id="preview">Pratinjau gambar</div>
+          <div class="fg"><label class="label" for="fImg">URL Gambar</label><input class="input" id="fImg" placeholder="https://" oninput="preview()"></div>
+          <div class="fg"><label class="label" for="fName">Nama Produk</label><input class="input" id="fName"></div>
+          <div class="row">
+            <div class="fg"><label class="label" for="fPrice">Harga (Rp)</label><input class="input" id="fPrice" type="number" min="0"></div>
+            <div class="fg"><label class="label" for="fStock">Stok</label><input class="input" id="fStock" type="number" min="0"></div>
           </div>
-
-          <div class="form-group">
-            <label class="form-label">Image URL</label>
-            <input type="text" id="fImg" class="form-input" placeholder="https://..." oninput="previewImage()">
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Product Name</label>
-            <input type="text" id="fName" class="form-input" placeholder="e.g. Premium Sneaker">
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Price (IDR)</label>
-              <input type="number" id="fPrice" class="form-input" placeholder="450000">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Stock</label>
-              <input type="number" id="fStock" class="form-input" placeholder="10">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Category</label>
-            <select id="fCat" class="form-input">
+          <div class="fg"><label class="label" for="fCat">Kategori</label>
+            <select class="input" id="fCat">
               <option value="FASHION">Fashion</option>
-              <option value="ELECTRONIC">Electronic</option>
-              <option value="ACCESSORY">Accessory</option>
-              <option value="EXCLUSIVE">Exclusive</option>
+              <option value="ELECTRONIC">Elektronik</option>
+              <option value="ACCESSORY">Aksesoris</option>
+              <option value="EXCLUSIVE">Eksklusif</option>
             </select>
           </div>
+          <button class="btn btn-dark" id="saveBtn" type="submit">Simpan Produk</button>
+          <button class="btn btn-ghost hidden" id="cancelBtn" type="button" onclick="resetForm()">Batal</button>
+        </form>
+      </div>
 
-          <button class="submit-btn" id="submitBtn" onclick="commitProduct()">Add Product</button>
-          <button class="cancel-btn" id="cancelBtn" onclick="resetForm()">Cancel Edit</button>
+      <div class="panel">
+        <div class="panel-h">
+          <div><h3>Inventaris</h3><span class="label" id="tableCount">0 produk</span></div>
+          <label class="tsearch"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="tSearch" placeholder="Cari nama atau kategori" oninput="renderTable()"></label>
         </div>
-
-        <!-- TABLE -->
-        <div class="table-panel">
-          <div class="table-header">
-            <div class="table-title">All Products</div>
-            <div class="table-search">
-              <svg width="13" height="13" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              <input type="text" id="tableSearch" placeholder="Search..." oninput="filterTable()">
-            </div>
-          </div>
-          <div id="tableWrap">
-            <div class="table-empty">
-              <div class="table-empty-icon">⏳</div>
-              <div class="table-empty-title">Loading...</div>
-            </div>
-          </div>
-        </div>
-
+        <div class="table-wrap" id="tableWrap"></div>
       </div>
     </div>
+  </main>
+</section>
+
+<div class="confirm hidden" id="confirm">
+  <div class="confirm-box">
+    <h4>Hapus produk?</h4>
+    <p id="confirmText"></p>
+    <div><button class="btn btn-ghost" onclick="closeConfirm()">Batal</button><button class="btn btn-dark" id="confirmYes">Hapus</button></div>
   </div>
+</div>
 
-  <!-- TOAST -->
-  <div class="toast" id="toast"></div>
+<div class="toast" id="toast"></div>
 
-  <script>
-    const SUPABASE_URL = 'https://clbcalmyotcbxiocorys.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsYmNhbG15b3RjYnhpb2NvcnlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NDgyNTksImV4cCI6MjA5MTEyNDI1OX0.IzEWTUcPCr4t-ZTqvPCqShE2BwRxvBFW1grJvggMhJM';
-    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+<script>
+/* Konfigurasi Supabase diambil dari environment variable Vercel
+   (VITE_SUPABASE_URL dan VITE_SUPABASE_ANON_KEY) melalui /api/config.
+   Login memakai Supabase Auth; akun merchant dibuat manual di dashboard Supabase. */
+const TABLE = 'produk_dimastore';
+const WA_LINK = 'https://wa.me/6281334331776';
+const LABELS = { FASHION:'Fashion', ELECTRONIC:'Elektronik', ACCESSORY:'Aksesoris', EXCLUSIVE:'Eksklusif' };
+let sb = null, products = [], channel = null;
 
-    let allProducts = [];
+const $ = id => document.getElementById(id);
+const rp = n => new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(n||0);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-    // ── AUTH ──
-    function doLogin() {
-      const pw = document.getElementById('pwInput').value;
-      if (pw === 'DiM3rL@2026!') {
-        document.getElementById('loginWrap').style.display = 'none';
-        document.getElementById('dashboard').style.display = 'block';
-        loadProducts();
-      } else {
-        document.getElementById('loginErr').style.display = 'block';
-        document.getElementById('pwInput').style.borderColor = '#dc2626';
-      }
-    }
+/* AUTH */
+function showLoginError(msg){ const e=$('loginErr'); e.textContent=msg; e.classList.remove('hidden'); }
+$('loginForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  if (!sb) { showLoginError('Konfigurasi belum lengkap. Periksa environment variable di Vercel.'); return; }
+  const email=$('email').value.trim(), password=$('password').value;
+  if (!email || !password){ showLoginError('Mohon isi email dan kata sandi.'); return; }
+  $('loginBtn').disabled=true; $('loginBtn').textContent='Memproses';
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  $('loginBtn').disabled=false; $('loginBtn').textContent='Masuk';
+  if (error) showLoginError('Email atau kata sandi tidak sesuai.');
+});
+async function logout(){ await sb.auth.signOut(); }
 
-    function doLogout() {
-      document.getElementById('loginWrap').style.display = 'flex';
-      document.getElementById('dashboard').style.display = 'none';
-      document.getElementById('pwInput').value = '';
-      document.getElementById('loginErr').style.display = 'none';
-    }
+function showDashboard(user){
+  $('loginView').classList.add('hidden');
+  $('dashView').classList.remove('hidden');
+  $('userEmail').textContent = user.email || '';
+  $('loginErr').classList.add('hidden'); $('password').value='';
+  loadProducts();
+  if (!channel) channel = sb.channel('console').on('postgres_changes',{event:'*',schema:'public',table:TABLE}, loadProducts).subscribe();
+}
+function showLogin(){
+  $('dashView').classList.add('hidden');
+  $('loginView').classList.remove('hidden');
+  if (channel){ sb.removeChannel(channel); channel=null; }
+  products=[];
+}
 
-    // ── PRODUCTS ──
-    async function loadProducts() {
-      const { data } = await _supabase
-        .from('produk_dimastore')
-        .select('*')
-        .order('id', { ascending: false });
-      allProducts = data || [];
-      updateStats();
-      renderTable();
-    }
+/* DATA */
+async function loadProducts(){
+  const { data, error } = await sb.from(TABLE).select('*').order('id',{ascending:false});
+  if (error){ toast('Gagal memuat produk'); return; }
+  products = data || [];
+  updateStats(); renderTable();
+}
+function updateStats(){
+  const total=products.length, active=products.filter(p=>p.stok>0).length;
+  const value=products.reduce((s,p)=>s+p.harga*Math.max(p.stok,0),0);
+  const low=products.filter(p=>p.stok>0&&p.stok<=5).length, out=products.filter(p=>p.stok<=0).length;
+  $('sTotal').textContent=total; $('sTotalSub').textContent=active+' aktif';
+  $('sValue').textContent = value>=1e9 ? (value/1e9).toFixed(1).replace('.',',')+' M' : value>=1e6 ? (value/1e6).toFixed(1).replace('.',',')+' Jt' : rp(value).replace('Rp','').trim();
+  $('sValueSub').textContent=rp(value);
+  $('sLow').textContent=low; $('sOut').textContent=out;
+  const parts=[]; if(low) parts.push(low+' produk stok menipis'); if(out) parts.push(out+' produk habis');
+  $('alertText').textContent = parts.join(' dan ') + '. Disarankan untuk segera melakukan restok.';
+  $('alert').classList.toggle('hidden', !parts.length);
+}
+function renderTable(){
+  const q=$('tSearch').value.trim().toLowerCase();
+  const list=products.filter(p=>!q||(p.nama_produk||'').toLowerCase().includes(q)||(p.kategori||'').toLowerCase().includes(q)||(LABELS[p.kategori]||'').toLowerCase().includes(q));
+  $('tableCount').textContent=list.length+' produk';
+  if(!list.length){ $('tableWrap').innerHTML=`<div class="empty"><h4>Belum ada produk</h4><p>${q?'Tidak ada hasil untuk pencarian ini.':'Tambahkan produk pertama melalui formulir.'}</p></div>`; return; }
+  $('tableWrap').innerHTML=`<table><thead><tr><th>Produk</th><th>Harga</th><th>Stok</th><th>Kategori</th><th style="text-align:right">Aksi</th></tr></thead><tbody>${
+    list.map(p=>{
+      const cls=p.stok<=0?'out':p.stok<=5?'low':'ok';
+      return `<tr>
+        <td><div class="prod"><img src="${esc(p.gambar_url)}" alt="" onerror="this.style.visibility='hidden'"><div><div class="n">${esc(p.nama_produk)}</div><div class="c">#${p.id}</div></div></div></td>
+        <td>${rp(p.harga)}</td>
+        <td><span class="stock ${cls}">${p.stok<=0?'Habis':p.stok+' pcs'}</span></td>
+        <td style="color:var(--gray);font-size:12px;letter-spacing:.1em;text-transform:uppercase">${esc(LABELS[p.kategori]||p.kategori)}</td>
+        <td style="text-align:right;white-space:nowrap"><button class="act" onclick="editProduct(${p.id})">Ubah</button><button class="act" onclick="askDelete(${p.id})">Hapus</button></td>
+      </tr>`;}).join('')
+  }</tbody></table>`;
+}
 
-    function formatPrice(n) {
-      return new Intl.NumberFormat('id-ID', {
-        style: 'currency', currency: 'IDR', minimumFractionDigits: 0
-      }).format(n);
-    }
+/* FORM */
+function preview(){
+  const url=$('fImg').value.trim(), box=$('preview');
+  if(!/^https?:\/\//.test(url)){ box.textContent='Pratinjau gambar'; return; }
+  box.innerHTML=''; const img=new Image(); img.alt='';
+  img.onerror=()=>{ box.textContent='Gambar tidak dapat dimuat'; };
+  img.src=url; box.appendChild(img);
+}
+function editProduct(id){
+  const p=products.find(x=>x.id===id); if(!p) return;
+  $('fId').value=p.id; $('fName').value=p.nama_produk; $('fPrice').value=p.harga; $('fStock').value=p.stok;
+  $('fCat').value=p.kategori in LABELS?p.kategori:'FASHION'; $('fImg').value=p.gambar_url||'';
+  $('formTitle').textContent='Ubah Produk'; $('formSub').textContent='Produk #'+p.id;
+  $('saveBtn').textContent='Perbarui Produk'; $('cancelBtn').classList.remove('hidden');
+  preview(); window.scrollTo({top:0,behavior:'smooth'});
+}
+function resetForm(){
+  $('prodForm').reset(); $('fId').value='';
+  $('formTitle').textContent='Tambah Produk'; $('formSub').textContent='Entri baru';
+  $('saveBtn').textContent='Simpan Produk'; $('cancelBtn').classList.add('hidden'); preview();
+}
+$('prodForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const id=$('fId').value, name=$('fName').value.trim(), price=parseInt($('fPrice').value,10), stock=parseInt($('fStock').value,10), img=$('fImg').value.trim();
+  if(!name||isNaN(price)||isNaN(stock)||!img){ toast('Mohon lengkapi semua kolom'); return; }
+  if(price<0||stock<0){ toast('Harga dan stok tidak boleh negatif'); return; }
+  const row={ nama_produk:name, harga:price, stok:stock, kategori:$('fCat').value, gambar_url:img, link_wa:WA_LINK };
+  $('saveBtn').disabled=true;
+  const { error } = id ? await sb.from(TABLE).update(row).eq('id',id) : await sb.from(TABLE).insert([row]);
+  $('saveBtn').disabled=false;
+  if(error){ toast('Gagal menyimpan. Periksa hak akses akun.'); return; }
+  toast(id?'Produk diperbarui':'Produk ditambahkan'); resetForm(); loadProducts();
+});
 
-    function updateStats() {
-      const total = allProducts.length;
-      const value = allProducts.reduce((s, p) => s + (p.harga * p.stok), 0);
-      const low = allProducts.filter(p => p.stok > 0 && p.stok <= 5).length;
-      const out = allProducts.filter(p => p.stok <= 0).length;
+/* DELETE */
+function askDelete(id){
+  const p=products.find(x=>x.id===id); if(!p) return;
+  $('confirmText').textContent=`"${p.nama_produk}" akan dihapus permanen dari katalog.`;
+  $('confirm').classList.remove('hidden');
+  $('confirmYes').onclick=async()=>{
+    closeConfirm();
+    const { error } = await sb.from(TABLE).delete().eq('id',id);
+    if(error){ toast('Gagal menghapus produk'); return; }
+    toast('Produk dihapus'); if($('fId').value==id) resetForm(); loadProducts();
+  };
+}
+function closeConfirm(){ $('confirm').classList.add('hidden'); }
 
-      document.getElementById('statTotal').textContent = total;
-      document.getElementById('statTotalSub').textContent = `${allProducts.filter(p=>p.stok>0).length} active`;
-      document.getElementById('statValue').textContent = total > 0 ? `${Math.round(value/1000000)}M` : '0';
-      document.getElementById('statValueSub').textContent = formatPrice(value);
-      document.getElementById('statLow').textContent = low;
-      document.getElementById('statLowSub').textContent = low > 0 ? 'Needs restocking' : 'All stocked';
-      document.getElementById('statOut').textContent = out;
-      document.getElementById('statOutSub').textContent = out > 0 ? 'Unavailable items' : 'All available';
+let tt; function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('on'); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('on'),2600); }
 
-      // Alert banner
-      const alert = document.getElementById('alertBanner');
-      const alertText = document.getElementById('alertText');
-      if (low > 0 || out > 0) {
-        let msg = [];
-        if (low > 0) msg.push(`${low} product${low>1?'s':''} running low on stock`);
-        if (out > 0) msg.push(`${out} product${out>1?'s':''} sold out`);
-        alertText.textContent = msg.join(' · ') + ' — please restock soon!';
-        alert.style.display = 'flex';
-      } else {
-        alert.style.display = 'none';
-      }
-    }
-
-    function filterTable() {
-      const q = document.getElementById('tableSearch').value.toLowerCase();
-      const filtered = allProducts.filter(p =>
-        p.nama_produk.toLowerCase().includes(q) ||
-        p.kategori.toLowerCase().includes(q)
-      );
-      renderTable(filtered);
-    }
-
-    function renderTable(data) {
-      const products = data || allProducts;
-      const wrap = document.getElementById('tableWrap');
-
-      if (products.length === 0) {
-        wrap.innerHTML = `
-          <div class="table-empty">
-            <div class="table-empty-icon">📭</div>
-            <div class="table-empty-title">No products found</div>
-            <div class="table-empty-sub">Add your first product using the form</div>
-          </div>`;
-        return;
-      }
-
-      wrap.innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Category</th>
-              <th style="text-align:right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${products.map(p => {
-              const stockClass = p.stok <= 0 ? 'stock-out' : p.stok <= 5 ? 'stock-low' : 'stock-ok';
-              const stockIcon = p.stok <= 0 ? '🔴' : p.stok <= 5 ? '🟡' : '🟢';
-              return `
-              <tr>
-                <td>
-                  <div class="td-product">
-                    <img class="td-img" src="${p.gambar_url}" alt="${p.nama_produk}" onerror="this.src='https://via.placeholder.com/52x64'">
-                    <div>
-                      <div class="td-name">${p.nama_produk}</div>
-                      <div class="td-cat">${p.kategori}</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="td-price">${formatPrice(p.harga)}</td>
-                <td>
-                  <span class="stock-badge ${stockClass}">
-                    ${stockIcon} ${p.stok <= 0 ? 'Sold Out' : p.stok + ' pcs'}
-                  </span>
-                </td>
-                <td><span style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--ink3)">${p.kategori}</span></td>
-                <td style="text-align:right">
-                  <button class="action-btn btn-edit" onclick="editProduct(${p.id},'${p.nama_produk.replace(/'/g,"\\'")}',${p.harga},${p.stok},'${p.kategori}','${p.gambar_url}')">Edit</button>
-                  <button class="action-btn btn-delete" onclick="deleteProduct(${p.id},'${p.nama_produk.replace(/'/g,"\\'")}')">Delete</button>
-                </td>
-              </tr>`;
-            }).join('')}
-          </tbody>
-        </table>`;
-    }
-
-    // ── FORM ──
-    function previewImage() {
-      const url = document.getElementById('fImg').value.trim();
-      const preview = document.getElementById('imgPreview');
-      const placeholder = document.getElementById('imgPlaceholder');
-      if (url) {
-        preview.src = url;
-        preview.style.display = 'block';
-        placeholder.style.display = 'none';
-        preview.onerror = () => {
-          preview.style.display = 'none';
-          placeholder.style.display = 'flex';
-        };
-      } else {
-        preview.style.display = 'none';
-        placeholder.style.display = 'flex';
-      }
-    }
-
-    function editProduct(id, name, price, stock, cat, img) {
-      document.getElementById('editId').value = id;
-      document.getElementById('fName').value = name;
-      document.getElementById('fPrice').value = price;
-      document.getElementById('fStock').value = stock;
-      document.getElementById('fCat').value = cat;
-      document.getElementById('fImg').value = img;
-      document.getElementById('formTitle').textContent = 'Edit Product';
-      document.getElementById('formSub').textContent = 'Update existing entry';
-      document.getElementById('submitBtn').textContent = 'Update Product';
-      document.getElementById('submitBtn').classList.add('editing');
-      document.getElementById('cancelBtn').style.display = 'block';
-      previewImage();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function resetForm() {
-      document.getElementById('editId').value = '';
-      document.getElementById('fName').value = '';
-      document.getElementById('fPrice').value = '';
-      document.getElementById('fStock').value = '';
-      document.getElementById('fImg').value = '';
-      document.getElementById('fCat').value = 'FASHION';
-      document.getElementById('imgPreview').style.display = 'none';
-      document.getElementById('imgPlaceholder').style.display = 'flex';
-      document.getElementById('formTitle').textContent = 'Add Product';
-      document.getElementById('formSub').textContent = 'Create new entry';
-      document.getElementById('submitBtn').textContent = 'Add Product';
-      document.getElementById('submitBtn').classList.remove('editing');
-      document.getElementById('cancelBtn').style.display = 'none';
-    }
-
-    async function commitProduct() {
-      const id = document.getElementById('editId').value;
-      const name = document.getElementById('fName').value.trim();
-      const price = document.getElementById('fPrice').value;
-      const stock = document.getElementById('fStock').value;
-      const cat = document.getElementById('fCat').value;
-      const img = document.getElementById('fImg').value.trim();
-
-      if (!name || !price || !stock || !img) {
-        showToast('Please fill all fields', 'error'); return;
-      }
-
-      const data = {
-        nama_produk: name, harga: parseInt(price),
-        stok: parseInt(stock), kategori: cat,
-        gambar_url: img, link_wa: 'https://wa.me/6281334331776'
-      };
-
-      document.getElementById('submitBtn').textContent = 'Saving...';
-
-      if (id) {
-        await _supabase.from('produk_dimastore').update(data).eq('id', id);
-        showToast('Product updated!', 'success');
-      } else {
-        await _supabase.from('produk_dimastore').insert([data]);
-        showToast('Product added!', 'success');
-      }
-
-      resetForm();
-      loadProducts();
-    }
-
-    async function deleteProduct(id, name) {
-      if (!confirm(`Delete "${name}"?\nThis action cannot be undone.`)) return;
-      await _supabase.from('produk_dimastore').delete().eq('id', id);
-      showToast(`"${name}" deleted`, 'error');
-      loadProducts();
-    }
-
-    // ── TOAST ──
-    function showToast(msg, type = '') {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.className = `toast ${type} show`;
-      setTimeout(() => t.classList.remove('show'), 2800);
-    }
-
-    // ── REALTIME ──
-    _supabase.channel('admin')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'produk_dimastore' }, loadProducts)
-      .subscribe();
-  </script>
+/* INIT */
+(async function init(){
+  try {
+    const cfg = await (await fetch('/api/config')).json();
+    if(!cfg.url||!cfg.anonKey) throw new Error('missing');
+    sb = supabase.createClient(cfg.url, cfg.anonKey);
+  } catch { showLoginError('Konfigurasi belum lengkap. Periksa environment variable di Vercel.'); return; }
+  const { data:{ session } } = await sb.auth.getSession();
+  if (session) showDashboard(session.user);
+  sb.auth.onAuthStateChange((event, s)=>{
+    if (event==='SIGNED_IN' && s && $('dashView').classList.contains('hidden')) showDashboard(s.user);
+    if (event==='SIGNED_OUT') showLogin();
+  });
+})();
+</script>
 </body>
 </html>
